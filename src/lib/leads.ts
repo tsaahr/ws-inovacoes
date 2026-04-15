@@ -27,23 +27,12 @@ const leadPayloadSchema = z.object({
 
 export type LeadPayload = z.infer<typeof leadPayloadSchema>;
 
-export type LeadRow = {
-  createdAt: string;
-  name: string;
-  email: string;
-  phone: string;
-  modality: string;
-  creditValue: string;
-  installment: string;
-  city: string;
-  status: string;
-};
-
 export type IntegrationResult = {
-  destination: "sheets" | "hubspot" | "evolution";
+  destination: "google" | "evolution";
   ok: boolean;
   skipped?: boolean;
   error?: string;
+  warning?: string;
 };
 
 type LeadValidationResult =
@@ -69,14 +58,14 @@ export function normalizeLeadPayload(input: unknown): LeadValidationResult {
   };
 }
 
-export async function appendLeadToSheets(
+export async function sendLeadToGoogle(
   lead: LeadPayload,
 ): Promise<IntegrationResult> {
   const url = process.env.APPS_SCRIPT_URL;
 
   if (!url) {
     return {
-      destination: "sheets",
+      destination: "google",
       ok: false,
       skipped: true,
       error: "APPS_SCRIPT_URL não configurada.",
@@ -91,66 +80,33 @@ export async function appendLeadToSheets(
 
   if (!response.ok) {
     return {
-      destination: "sheets",
+      destination: "google",
       ok: false,
-      error: `Google Sheets retornou HTTP ${response.status}.`,
+      error: `Google Apps Script retornou HTTP ${response.status}.`,
     };
   }
 
-  const data = (await response.json().catch(() => null)) as {
-    success?: boolean;
-    error?: string;
-  } | null;
+  const data = (await response.json().catch(() => null)) as
+    | {
+        success?: boolean;
+        error?: string;
+        warning?: string;
+      }
+    | null;
 
   if (!data?.success) {
     return {
-      destination: "sheets",
+      destination: "google",
       ok: false,
-      error: data?.error || "Google Sheets não confirmou a gravação.",
+      error: data?.error || "Google Apps Script não confirmou o recebimento.",
     };
   }
 
-  return { destination: "sheets", ok: true };
-}
-
-export async function submitLeadToHubSpot(
-  lead: LeadPayload,
-): Promise<IntegrationResult> {
-  const portalId = process.env.HUBSPOT_PORTAL_ID;
-  const formId = process.env.HUBSPOT_FORM_ID;
-
-  if (!portalId || !formId) {
-    return {
-      destination: "hubspot",
-      ok: false,
-      skipped: true,
-      error: "HubSpot não configurado.",
-    };
-  }
-
-  const endpoint = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
-  const response = await fetch(endpoint, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      fields: [
-        { name: "firstname", value: lead.name },
-        { name: "email", value: lead.email },
-        { name: "phone", value: lead.phone },
-        { name: "message", value: formatLeadSummary(lead) },
-      ],
-    }),
-  });
-
-  if (!response.ok) {
-    return {
-      destination: "hubspot",
-      ok: false,
-      error: `HubSpot retornou HTTP ${response.status}.`,
-    };
-  }
-
-  return { destination: "hubspot", ok: true };
+  return {
+    destination: "google",
+    ok: true,
+    warning: data.warning,
+  };
 }
 
 export async function sendEvolutionMessage(
@@ -196,15 +152,6 @@ export async function sendEvolutionMessage(
   return { destination: "evolution", ok: true };
 }
 
-function formatLeadSummary(lead: LeadPayload) {
-  return [
-    `Modalidade: ${lead.modality}`,
-    `Crédito: ${lead.creditValue}`,
-    `Parcela ideal: ${lead.installment}`,
-    `Cidade: ${lead.city}`,
-  ].join("\n");
-}
-
 function formatWhatsappMessage(lead: LeadPayload) {
   return [
     "🚗 *Novo Lead - WS Inovações*",
@@ -217,7 +164,5 @@ function formatWhatsappMessage(lead: LeadPayload) {
     `💳 Parcela ideal: ${lead.installment}`,
     `📍 Cidade: ${lead.city}`,
     `📅 ${new Date().toLocaleString("pt-BR")}`,
-    "",
-    "👉 Painel: https://seusite.com/admin",
   ].join("\n");
 }

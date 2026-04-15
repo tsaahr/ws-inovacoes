@@ -1,9 +1,8 @@
 import {
-  appendLeadToSheets,
-  type IntegrationResult,
   normalizeLeadPayload,
   sendEvolutionMessage,
-  submitLeadToHubSpot,
+  sendLeadToGoogle,
+  type IntegrationResult,
 } from "@/lib/leads";
 
 export async function POST(request: Request) {
@@ -18,19 +17,30 @@ export async function POST(request: Request) {
   }
 
   const settledResults = await Promise.allSettled([
-    appendLeadToSheets(normalized.lead),
-    submitLeadToHubSpot(normalized.lead),
+    sendLeadToGoogle(normalized.lead),
     sendEvolutionMessage(normalized.lead),
   ]);
+
   const integrations = settledResults.map((result, index) =>
     normalizeIntegrationResult(result, index),
   );
+
   const hasSuccess = integrations.some((integration) => integration.ok);
 
   integrations
     .filter((integration) => !integration.ok)
     .forEach((integration) => {
       console.error("[lead-capture]", integration.destination, integration.error);
+    });
+
+  integrations
+    .filter((integration) => integration.warning)
+    .forEach((integration) => {
+      console.warn(
+        "[lead-capture]",
+        integration.destination,
+        integration.warning,
+      );
     });
 
   if (!hasSuccess) {
@@ -58,9 +68,8 @@ function normalizeIntegrationResult(
   result: PromiseSettledResult<IntegrationResult>,
   index: number,
 ): IntegrationResult {
-  const destination = ["sheets", "hubspot", "evolution"][index] as
-    | "sheets"
-    | "hubspot"
+  const destination = ["google", "evolution"][index] as
+    | "google"
     | "evolution";
 
   if (result.status === "fulfilled") {

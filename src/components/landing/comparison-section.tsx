@@ -1,64 +1,158 @@
-import { Badge } from "@/components/ui/badge";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+"use client";
 
-const comparisonRows = [
-  ["Juros", "❌ Sem juros", "✅ 1,5% a 2,5% ao mês"],
-  ["Entrada", "❌ Não obrigatória", "✅ Geralmente 20%"],
-  ["Burocracia", "✅ Mínima", "❌ Alta"],
-  ["Poder de compra", "✅ Carta de crédito = compra à vista", "❌ Financiamento vinculado"],
-  ["Flexibilidade", "✅ Você escolhe o bem na contemplação", "❌ Bem definido na contratação"],
+import { CheckCircle2, Info, XCircle } from "lucide-react";
+import { motion } from "motion/react";
+
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+
+const comparisonItems = [
+  {
+    label: "Juros",
+    consortium: "Zero juros",
+    financing: "1,5% a 2,5% ao mês",
+  },
+  {
+    label: "Entrada",
+    consortium: "Não obrigatória",
+    financing: "Geralmente 20%",
+  },
+  {
+    label: "Burocracia",
+    consortium: "Mínima",
+    financing: "Alta",
+  },
+  {
+    label: "Poder de compra",
+    consortium: "Carta de crédito = à vista",
+    financing: "Vinculado ao contrato",
+  },
+  {
+    label: "Flexibilidade",
+    consortium: "Você escolhe na contemplação",
+    financing: "Bem definido na contratação",
+  },
 ] as const;
 
 export function ComparisonSection() {
   return (
-    <div className="mx-auto flex max-w-6xl flex-col gap-8">
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="mx-auto flex max-w-6xl flex-col gap-8"
+    >
       <div className="flex max-w-3xl flex-col gap-4">
         <Badge
           variant="secondary"
-          className="w-fit bg-brand-blue/10 text-brand-dark"
+          className="w-fit rounded-full bg-brand-blue/10 px-4 py-1 text-sm text-brand-blue"
         >
-          Entenda por que o consórcio é a escolha inteligente
+          Entenda a diferença
         </Badge>
         <h2 className="text-3xl font-semibold leading-tight text-brand-dark md:text-5xl">
           Consórcio vs Financiamento
         </h2>
         <p className="text-lg leading-8 text-muted-foreground">
-          Compare os dois caminhos e veja por que o consórcio entrega mais
-          planejamento, menos custo financeiro e mais liberdade na compra.
+          Veja na prática por que o consórcio custa muito menos no longo prazo.
         </p>
       </div>
 
-      <div className="overflow-hidden rounded-lg border border-brand-silver/50 bg-background">
-        <Table className="min-w-[720px]">
-          <TableHeader>
-            <TableRow>
-              <TableHead className="px-4 py-4">Feature</TableHead>
-              <TableHead className="px-4 py-4 text-brand-dark">
-                Consórcio WS
-              </TableHead>
-              <TableHead className="px-4 py-4">Financiamento Bancário</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {comparisonRows.map((row) => (
-              <TableRow key={row[0]}>
-                <TableCell className="px-4 py-4 font-medium text-brand-dark">
-                  {row[0]}
-                </TableCell>
-                <TableCell className="px-4 py-4">{row[1]}</TableCell>
-                <TableCell className="px-4 py-4">{row[2]}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+      <div className="grid grid-cols-1 items-stretch gap-4 md:grid-cols-2">
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+          className="relative flex h-full pt-4"
+        >
+          <span className="absolute -top-3 left-1/2 z-10 -translate-x-1/2 rounded-full bg-brand-blue px-4 py-1 text-xs font-medium text-white">
+            Recomendado
+          </span>
+
+          <Card className="flex h-full w-full flex-col rounded-xl border-2 border-brand-blue shadow-none">
+            <CardHeader className="pb-4">
+              <div className="flex items-center gap-3">
+                <span className="size-2 rounded-full bg-brand-blue" />
+                <p className="font-medium text-brand-dark">Consórcio WS</p>
+              </div>
+            </CardHeader>
+            <CardContent className="flex flex-1 flex-col gap-4">
+              {comparisonItems.map((item) => (
+                <div
+                  key={item.label}
+                  className="flex min-h-[60px] items-start gap-3 rounded-lg border border-emerald-100/80 bg-emerald-50/70 px-3 py-3"
+                >
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-700" />
+                  <div className="min-w-0">
+                    <p className="text-[11px] leading-4 text-muted-foreground">
+                      {item.label}
+                    </p>
+                    <p className="text-[13px] font-medium leading-5 text-emerald-800">
+                      {item.consortium}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          className="flex h-full pt-4"
+        >
+          <Card className="flex h-full w-full flex-col rounded-xl border border-border shadow-none">
+            <CardHeader className="pb-4">
+              <div className="flex items-center gap-3">
+                <span className="size-2 rounded-full bg-brand-silver" />
+                <p className="font-medium text-muted-foreground">
+                  Financiamento bancário
+                </p>
+              </div>
+            </CardHeader>
+            <CardContent className="flex flex-1 flex-col gap-4">
+              {comparisonItems.map((item) => (
+                <div
+                  key={item.label}
+                  className="flex min-h-[60px] items-start gap-3 rounded-lg border border-border/70 bg-muted/40 px-3 py-3"
+                >
+                  <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-400" />
+                  <div className="min-w-0">
+                    <p className="text-[11px] leading-4 text-muted-foreground">
+                      {item.label}
+                    </p>
+                    <p className="text-[13px] leading-5 text-muted-foreground line-through">
+                      {item.financing}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        </motion.div>
       </div>
-    </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.35, ease: "easeOut" }}
+        className="flex items-start gap-3 rounded-xl border border-border bg-muted p-4"
+      >
+        <Info className="mt-0.5 h-5 w-5 shrink-0 text-brand-blue" />
+        <p className="text-sm leading-6 text-muted-foreground">
+          Num financiamento de{" "}
+          <span className="font-medium text-foreground">R$ 60.000</span> em{" "}
+          <span className="font-medium text-foreground">60 meses</span>, você
+          pode pagar até{" "}
+          <span className="font-medium text-foreground">R$ 25.000 a mais</span>{" "}
+          só em juros. No consórcio, esse valor vai inteiro para o seu crédito.
+        </p>
+      </motion.div>
+    </motion.div>
   );
 }

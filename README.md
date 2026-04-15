@@ -1,14 +1,20 @@
 # WS Inovações
 
-Landing page em Next.js 16 para captação de leads de consórcio de carro, com formulário integrado a Google Sheets via Apps Script, HubSpot Forms API e Evolution API para aviso por WhatsApp.
+Landing page em Next.js 16 para captação de leads de consórcio, com envio para:
+
+- WhatsApp via Evolution API
+- planilha no Google Sheets via Google Apps Script
+- e-mail enviado pelo próprio Google Apps Script
+
+Neste momento o projeto está sem CRM e sem painel administrativo. A ideia é manter o fluxo simples para receber leads e organizar tudo pelo Google + WhatsApp.
 
 ## Stack
 
 - Next.js 16 App Router com Turbopack
 - React 19
-- Tailwind CSS v4 CSS-first, com tokens em `src/app/globals.css`
-- shadcn/ui estilo `new-york` em componentes locais
-- `tw-animate-css`, `motion`, Recharts, Radix UI, React Hook Form, Zod e Sonner
+- Tailwind CSS v4 CSS-first
+- shadcn/ui estilo `new-york`
+- `motion`, `tw-animate-css`, Radix UI, React Hook Form, Zod e Sonner
 
 ## Como Rodar
 
@@ -17,7 +23,7 @@ npm install
 npm run dev
 ```
 
-Acesse `http://localhost:3000`.
+Acesse [http://localhost:3000](http://localhost:3000).
 
 Para validar produção local:
 
@@ -33,115 +39,143 @@ Crie `.env.local` a partir de `.env.example`.
 
 ```bash
 APPS_SCRIPT_URL="https://script.google.com/macros/s/SEU_DEPLOYMENT_ID/exec"
-APPS_SCRIPT_READ_TOKEN="troque-este-token"
-
-HUBSPOT_PORTAL_ID="0000000"
-HUBSPOT_FORM_ID="00000000-0000-0000-0000-000000000000"
 
 EVOLUTION_API_URL="https://evolution.exemplo.com"
 EVOLUTION_INSTANCE="ws-inovacoes"
 EVOLUTION_API_KEY="troque-esta-chave"
 OWNER_PHONE="5511999999999"
-
-ADMIN_PASSWORD="troque-esta-senha"
 ```
 
-## Google Apps Script
+## O Que o Lead Faz Hoje
 
-O código está em `google-apps-script/Code.gs`.
+Quando alguém envia o formulário:
 
-Configure Script Properties no Apps Script:
+1. o site envia os dados para o Google Apps Script
+2. o Apps Script grava o lead na planilha
+3. o Apps Script envia um e-mail para o endereço que você definir
+4. o site também envia uma mensagem para o seu WhatsApp via Evolution API
+
+Se pelo menos um destino aceitar o lead, o formulário retorna sucesso para o visitante.
+
+## Passo a Passo Para Começar a Receber Leads
+
+### 1. Criar a planilha no Google
+
+1. Acesse [Google Sheets](https://sheets.google.com).
+2. Crie uma nova planilha.
+3. Dê um nome como `Leads WS Inovações`.
+4. Copie o ID da planilha pela URL.
+
+Exemplo:
+
+```text
+https://docs.google.com/spreadsheets/d/ESTE_E_O_ID_DA_PLANILHA/edit
+```
+
+### 2. Criar o Apps Script no seu Google
+
+1. Com a planilha aberta, vá em `Extensões > Apps Script`.
+2. Apague o conteúdo padrão.
+3. Cole o conteúdo do arquivo [Code.gs](C:/Projetos/ws-inovacoes/google-apps-script/Code.gs).
+4. Salve o projeto.
+
+### 3. Configurar as Script Properties
+
+No Apps Script, vá em `Project Settings > Script Properties` e crie:
 
 ```text
 SHEET_ID=<id-da-planilha>
 SHEET_NAME=Leads
-READ_TOKEN=<mesmo valor de APPS_SCRIPT_READ_TOKEN>
+NOTIFICATION_EMAIL=<o-email-onde-voce-quer-receber-os-leads>
 ```
 
-Publique como Web App e use a URL em `APPS_SCRIPT_URL`.
+Exemplo:
 
-O Apps Script:
+```text
+NOTIFICATION_EMAIL=seuemail@seudominio.com
+```
 
-- recebe `POST { name, email, phone, modality, creditValue, installment, city }`
-- grava `createdAt`, `name`, `email`, `phone`, `modality`, `creditValue`, `installment`, `city`, `status`
-- define `status` inicial como `Novo`
-- expõe `GET ?token=...` para o dashboard administrativo
+### 4. Publicar o Apps Script como Web App
 
-## Rotas
+1. Clique em `Deploy > New deployment`.
+2. Escolha `Web app`.
+3. Em `Execute as`, use `Me`.
+4. Em `Who has access`, escolha `Anyone`.
+5. Clique em `Deploy`.
+6. Copie a URL gerada.
 
-- `/` landing page pública
-- `/api/leads` valida o lead, tenta Google Sheets, HubSpot e Evolution API em paralelo e retorna sucesso se ao menos uma integração aceitar o envio
+Essa URL vai para `APPS_SCRIPT_URL` no `.env.local`.
+
+### 5. Configurar o `.env.local`
+
+Crie o arquivo `.env.local` na raiz do projeto:
+
+```bash
+APPS_SCRIPT_URL="https://script.google.com/macros/s/SEU_DEPLOYMENT_ID/exec"
+
+EVOLUTION_API_URL="https://evolution.exemplo.com"
+EVOLUTION_INSTANCE="ws-inovacoes"
+EVOLUTION_API_KEY="troque-esta-chave"
+OWNER_PHONE="5511999999999"
+```
+
+### 6. Configurar o recebimento no WhatsApp
+
+Você precisa ter a Evolution API funcionando e apontar:
+
+- `EVOLUTION_API_URL`: URL base da sua Evolution
+- `EVOLUTION_INSTANCE`: nome da instância
+- `EVOLUTION_API_KEY`: chave da API
+- `OWNER_PHONE`: número que vai receber os leads
+
+Use o formato com DDI e DDD, por exemplo:
+
+```text
+5511999999999
+```
+
+### 7. Subir o site
+
+```bash
+npm run dev
+```
+
+ou, para produção:
+
+```bash
+npm run build
+npm run start
+```
+
+### 8. Fazer um teste real
+
+1. Abra o site.
+2. Preencha o formulário.
+3. Envie um lead de teste.
+4. Confira:
+   - se chegou mensagem no WhatsApp
+   - se apareceu uma nova linha na planilha
+   - se o e-mail foi entregue no endereço configurado em `NOTIFICATION_EMAIL`
+
+## Onde Ajustar Se Alguma Coisa Falhar
+
+- Google Sheets + e-mail: [Code.gs](C:/Projetos/ws-inovacoes/google-apps-script/Code.gs)
+- envio principal do lead: [route.ts](C:/Projetos/ws-inovacoes/src/app/api/leads/route.ts)
+- integrações do lead: [leads.ts](C:/Projetos/ws-inovacoes/src/lib/leads.ts)
+- variáveis de ambiente de exemplo: [.env.example](C:/Projetos/ws-inovacoes/.env.example)
 
 ## Formulário
 
-O formulário de captação coleta:
+O formulário coleta:
 
 - Nome
 - E-mail
 - WhatsApp com máscara `(99) 99999-9999`
-- Modalidade do crédito: `Automóvel`, `Imobiliário`, `Rural`, `Procedimentos Corporais`
-- Valor do crédito como valor livre digitado pelo cliente
-- Parcela ideal como valor livre digitado pelo cliente
-- Cidade/Estado com placeholder `Ex: Rio Grande / RS`
-- `/admin/login` tela de senha
-- `/admin` dashboard protegido por cookie `ADMIN_PASSWORD`
+- Modalidade do crédito
+- Valor do crédito
+- Parcela ideal
+- Cidade/Estado
 
-Observação: no Next.js 16, o antigo `middleware.ts` foi renomeado para `proxy.ts`; por isso o gate administrativo usa `src/proxy.ts`.
+## Observação
 
-## Tailwind
-
-Este projeto não usa `tailwind.config.js`. Os tokens de marca ficam em `@theme` dentro de `src/app/globals.css`:
-
-- `--color-brand-navy: #1a3a6b`
-- `--color-brand-blue: #0099d6`
-- `--color-brand-silver: #b0b8c1`
-- `--color-brand-dark: #0d1f3c`
-
-## Navegação
-
-- Navbar fixa no topo com `bg-brand-dark/80` e `backdrop-blur-md`
-- Símbolo da marca recortado e exibido com `next/image` + `brightness-0 invert`
-- Lockup horizontal no tablet/desktop com símbolo + texto `WS Inovações`
-- Links centrais alinhados às seções atuais da landing: `Simulação`, `Sobre nós`, `Serviços`, `Como funciona`, `Simulador` e `FAQ`
-- Menu hambúrguer no mobile reaproveita os mesmos links
-- CTA de WhatsApp no lado direito
-- Sem borda branca sob a navbar, para manter o topo mais limpo
-
-## Landing Page
-
-Seções atuais da página pública:
-
-- Hero
-- `Números que comprovam`
-- Formulário de contato em `#contato` com alias legado `#lead-form`
-- `Sobre a WS Inovações`
-- `Nossos Serviços`
-- `Consórcio vs Financiamento`
-- `Como funciona`
-- Simulador
-- FAQ
-- Instagram
-- CTA final
-- Footer
-
-Recursos visuais atuais:
-
-- hero usando o asset local `Foto1.jpeg`
-- seção `Sobre a WS Inovações` usando o asset local `Foto2.png`
-- enquadramento das duas fotos ajustado com `object-position` para priorizar os rostos
-- contadores animados na barra de prova social
-- prova social atualizada para 3 números centralizados: `+500 clientes`, `R$ 20M+ em crédito aprovado` e `4 anos de experiência`
-- cards de serviços com stagger
-- timeline responsiva do fluxo do consórcio
-- tabela comparativa com shadcn `Table`
-- FAQ com `Accordion` e primeira pergunta aberta por padrão
-- feed do Instagram renderizado no servidor com as 3 publicações públicas mais recentes
-- seção do Instagram exibida somente quando o perfil retorna posts válidos
-
-## Simulador
-
-- O simulador usa a tabela do arquivo `Tabela consorcio.pdf`
-- Plano utilizado: `Plano Acesso Auto`
-- Taxa informada na tabela: `0,22% ao mês`
-- Prazo da tabela: `100 meses`
-- Faixas disponíveis atualmente: de `R$ 45.000,00` até `R$ 240.000,00`
+O projeto foi simplificado para operar sem CRM por enquanto. Quando você quiser migrar para Supabase depois, o melhor caminho é reaproveitar o payload atual do lead e criar uma nova camada de persistência/gestão em cima dele.

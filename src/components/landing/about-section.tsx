@@ -10,13 +10,13 @@ type AboutSectionProps = {
 export function AboutSection({ image }: AboutSectionProps) {
   return (
     <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[1fr_0.95fr] md:items-center">
-      <div className="relative min-h-[380px] overflow-hidden rounded-lg md:min-h-[440px]">
+      <div className="relative min-h-[380px] overflow-hidden rounded-lg md:min-h-[440px] xl:min-h-[500px]">
         <Image
           src={image}
           alt="Equipe comercial apresentando soluções de consórcio"
           fill
           sizes="(min-width: 768px) 50vw, 100vw"
-          className="object-cover object-[50%_16%] md:object-[50%_18%]"
+          className="object-cover object-[50%_16%] md:object-[50%_18%] xl:object-[50%_12%]"
         />
       </div>
       <div className="flex flex-col gap-5">

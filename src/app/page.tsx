@@ -26,7 +26,7 @@ export default async function Home() {
   const whatsappText = encodeURIComponent(
     "Olá, quero fazer uma simulação com a WS Inovações.",
   );
-  const whatsappHref = `https://wa.me/${ownerPhone}?text=${whatsappText}`;
+  const whatsappHref = `https://web.whatsapp.com/send?phone=${ownerPhone}&text=${whatsappText}`;
   const instagramFeed = await instagramFeedPromise;
 
   return (
@@ -38,26 +38,26 @@ export default async function Home() {
           direction="left"
           className="relative flex min-h-[calc(100svh-4rem)] items-center overflow-hidden bg-brand-dark pt-20 lg:min-h-[calc(100svh-5rem)]"
         >
-          <div className="absolute inset-0 lg:left-[38%] xl:left-[42%]">
+          <div className="absolute inset-0 lg:left-[46%] xl:left-[52%] 2xl:left-[56%]">
             <Image
               src={heroPhoto}
               alt="Imagem principal da WS Inovações"
               fill
               sizes="100vw"
-              className="object-cover object-[63%_18%] sm:object-[60%_20%] lg:object-[46%_18%] xl:object-[48%_20%] 2xl:object-[50%_22%]"
+              className="object-cover object-[63%_18%] sm:object-[60%_20%] lg:object-[54%_16%] xl:object-[56%_18%] 2xl:object-[58%_20%]"
               priority
             />
           </div>
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(13,31,60,0.94),rgba(13,31,60,0.82),rgba(13,31,60,0.32))] lg:bg-[linear-gradient(90deg,rgba(13,31,60,0.96)_0%,rgba(13,31,60,0.92)_34%,rgba(13,31,60,0.76)_48%,rgba(13,31,60,0.36)_66%,rgba(13,31,60,0.08)_100%)]" />
-          <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-16 text-white md:px-8 md:py-20">
-            <div className="max-w-[20rem] sm:max-w-2xl">
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(13,31,60,0.94),rgba(13,31,60,0.82),rgba(13,31,60,0.32))] lg:bg-[linear-gradient(90deg,rgba(13,31,60,0.97)_0%,rgba(13,31,60,0.94)_36%,rgba(13,31,60,0.78)_52%,rgba(13,31,60,0.34)_72%,rgba(13,31,60,0.08)_100%)]" />
+          <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-16 text-white md:px-8 md:py-20 lg:py-24 xl:py-28">
+            <div className="max-w-[20rem] sm:max-w-2xl lg:max-w-[32rem]">
               <h1 className="break-words text-3xl font-semibold leading-tight sm:text-4xl md:text-6xl">
                 Seu consórcio de carro com clareza do primeiro contato à
                 contemplação.
               </h1>
-              <p className="mt-6 max-w-[20rem] text-lg leading-8 text-white/86 sm:max-w-xl">
-                Planeje sua carta de crédito com atendimento consultivo,
-                simulação objetiva e acompanhamento próximo.
+              <p className="mt-6 max-w-[20rem] text-lg leading-8 text-white/86 sm:max-w-xl lg:max-w-lg">
+                Planeje sua carta de crédito com simulação objetiva e
+                acompanhamento próximo em cada etapa.
               </p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row">
