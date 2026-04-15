@@ -9,6 +9,7 @@ import { ComparisonSection } from "@/components/landing/comparison-section";
 import { CreditSimulator } from "@/components/landing/credit-simulator";
 import { FaqSection } from "@/components/landing/faq-section";
 import { FinalCtaBanner } from "@/components/landing/final-cta-banner";
+import { FloatingWhatsAppButton } from "@/components/landing/floating-whatsapp-button";
 import { HowItWorksTimeline } from "@/components/landing/how-it-works-timeline";
 import { InstagramFeedSection } from "@/components/landing/instagram-feed-section";
 import { LeadCaptureForm } from "@/components/landing/lead-capture-form";
@@ -16,6 +17,7 @@ import { ServicesGrid } from "@/components/landing/services-grid";
 import { SiteFooter } from "@/components/landing/site-footer";
 import { SiteNavbar } from "@/components/landing/site-navbar";
 import { SocialProofBar } from "@/components/landing/social-proof-bar";
+import { SmartWhatsAppLink } from "@/components/landing/smart-whatsapp-link";
 import { Button } from "@/components/ui/button";
 import { getInstagramFeed } from "@/lib/instagram";
 import { onlyDigits } from "@/lib/utils";
@@ -23,16 +25,20 @@ import { onlyDigits } from "@/lib/utils";
 export default async function Home() {
   const instagramFeedPromise = getInstagramFeed(3);
   const ownerPhone = onlyDigits(process.env.OWNER_PHONE || "") || "5500000000000";
-  const whatsappText = encodeURIComponent(
-    "Olá, quero fazer uma simulação com a WS Inovações.",
-  );
-  const whatsappHref = `https://web.whatsapp.com/send?phone=${ownerPhone}&text=${whatsappText}`;
+  const whatsappMessage = "Olá, quero fazer uma simulação com a WS Inovações.";
   const instagramFeed = await instagramFeedPromise;
 
   return (
     <>
       <main id="inicio" className="flex flex-col overflow-x-hidden bg-background">
-        <SiteNavbar whatsappHref={whatsappHref} />
+        <SiteNavbar
+          ownerPhone={ownerPhone}
+          whatsappMessage={whatsappMessage}
+        />
+        <FloatingWhatsAppButton
+          phone={ownerPhone}
+          message={whatsappMessage}
+        />
 
         <AnimatedSection
           direction="left"
@@ -52,12 +58,12 @@ export default async function Home() {
           <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-16 text-white md:px-8 md:py-20 lg:py-24 xl:py-28">
             <div className="max-w-[20rem] sm:max-w-2xl lg:max-w-[32rem]">
               <h1 className="break-words text-3xl font-semibold leading-tight sm:text-4xl md:text-6xl">
-                Seu consórcio de carro com clareza do primeiro contato à
-                contemplação.
+                Planejamento e estratégia para sua contemplação acontecer com
+                mais previsibilidade.
               </h1>
               <p className="mt-6 max-w-[20rem] text-lg leading-8 text-white/86 sm:max-w-xl lg:max-w-lg">
-                Planeje sua carta de crédito com simulação objetiva e
-                acompanhamento próximo em cada etapa.
+                Análise, acompanhamento e orientação para quem busca crédito de
+                forma inteligente, seja para veículo, imóvel ou investimento.
               </p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row">
@@ -70,9 +76,12 @@ export default async function Home() {
                 size="lg"
                 className="border-white/70 bg-white/10 text-white hover:bg-white hover:text-brand-dark"
               >
-                <a href={whatsappHref} target="_blank" rel="noreferrer">
+                <SmartWhatsAppLink
+                  phone={ownerPhone}
+                  message={whatsappMessage}
+                >
                   Falar no WhatsApp
-                </a>
+                </SmartWhatsAppLink>
               </Button>
             </div>
           </div>
@@ -193,11 +202,17 @@ export default async function Home() {
         {instagramFeed ? <InstagramFeedSection feed={instagramFeed} /> : null}
 
         <AnimatedSection direction="left" className="px-6 pb-20 md:px-8">
-          <FinalCtaBanner whatsappHref={whatsappHref} />
+          <FinalCtaBanner
+            ownerPhone={ownerPhone}
+            whatsappMessage={whatsappMessage}
+          />
         </AnimatedSection>
       </main>
 
-      <SiteFooter whatsappHref={whatsappHref} />
+      <SiteFooter
+        ownerPhone={ownerPhone}
+        whatsappMessage={whatsappMessage}
+      />
     </>
   );
 }

@@ -3,8 +3,11 @@ import { Camera, MapPin, MessageCircle } from "lucide-react";
 
 import logoSymbol from "../../../logo-symbol.png";
 
+import { SmartWhatsAppLink } from "@/components/landing/smart-whatsapp-link";
+
 type SiteFooterProps = {
-  whatsappHref: string;
+  ownerPhone: string;
+  whatsappMessage: string;
 };
 
 const INSTAGRAM_URL = "https://www.instagram.com/ws.inovacoes/";
@@ -17,7 +20,10 @@ const quickLinks = [
   { href: "#faq", label: "FAQ" },
 ] as const;
 
-export function SiteFooter({ whatsappHref }: SiteFooterProps) {
+export function SiteFooter({
+  ownerPhone,
+  whatsappMessage,
+}: SiteFooterProps) {
   return (
     <footer className="bg-brand-dark text-white">
       <div className="mx-auto grid max-w-6xl gap-10 px-6 py-16 md:grid-cols-3 md:px-8">
@@ -64,15 +70,14 @@ export function SiteFooter({ whatsappHref }: SiteFooterProps) {
             Contato
           </h3>
           <div className="flex flex-col gap-3 text-white/76">
-            <a
-              href={whatsappHref}
-              target="_blank"
-              rel="noreferrer"
+            <SmartWhatsAppLink
+              phone={ownerPhone}
+              message={whatsappMessage}
               className="flex items-center gap-2 transition-colors hover:text-white"
             >
               <MessageCircle />
               WhatsApp
-            </a>
+            </SmartWhatsAppLink>
             <a
               href={INSTAGRAM_URL}
               target="_blank"

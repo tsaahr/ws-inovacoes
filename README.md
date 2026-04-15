@@ -8,6 +8,15 @@ Landing page em Next.js 16 para captação de leads de consórcio, com envio par
 
 Neste momento o projeto está sem CRM e sem painel administrativo. A ideia é manter o fluxo simples para receber leads e organizar tudo pelo Google + WhatsApp.
 
+As CTAs públicas de WhatsApp agora usam um link inteligente:
+
+- desktop: `web.whatsapp.com/send`
+- mobile: `wa.me`
+
+A marca também passou a ser usada como ícone da aba, e a landing ganhou um botão flutuante de WhatsApp fixo no canto inferior direito.
+
+A copy do hero foi ampliada para posicionar a WS Inovações além de carro, incluindo também imóvel e investimento.
+
 ## Stack
 
 - Next.js 16 App Router com Turbopack

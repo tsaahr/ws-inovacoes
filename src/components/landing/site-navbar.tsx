@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 
 import logoSymbol from "../../../logo-symbol.png";
 
+import { SmartWhatsAppLink } from "@/components/landing/smart-whatsapp-link";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
@@ -19,10 +20,14 @@ const navLinks = [
 ] as const;
 
 type SiteNavbarProps = {
-  whatsappHref: string;
+  ownerPhone: string;
+  whatsappMessage: string;
 };
 
-export function SiteNavbar({ whatsappHref }: SiteNavbarProps) {
+export function SiteNavbar({
+  ownerPhone,
+  whatsappMessage,
+}: SiteNavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navbarRef = useRef<HTMLElement>(null);
 
@@ -53,7 +58,7 @@ export function SiteNavbar({ whatsappHref }: SiteNavbarProps) {
       ref={navbarRef}
       className="fixed inset-x-0 top-0 z-50 bg-brand-dark/80 backdrop-blur-md"
     >
-      <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between gap-3 px-4 sm:px-6 md:gap-5 md:px-8 xl:px-10 lg:h-20">
+      <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between gap-3 px-4 sm:px-6 md:gap-5 md:px-8 lg:h-20 xl:px-10">
         <a
           href="#inicio"
           aria-label="Voltar para o início"
@@ -99,9 +104,12 @@ export function SiteNavbar({ whatsappHref }: SiteNavbarProps) {
             size="sm"
             className="h-9 px-3 text-xs whitespace-nowrap sm:text-sm lg:h-10 lg:px-4"
           >
-            <a href={whatsappHref} target="_blank" rel="noreferrer">
+            <SmartWhatsAppLink
+              phone={ownerPhone}
+              message={whatsappMessage}
+            >
               Falar no WhatsApp
-            </a>
+            </SmartWhatsAppLink>
           </Button>
 
           <Button

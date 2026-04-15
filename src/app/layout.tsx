@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+
+import logoSymbol from "../../logo-symbol.png";
+
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
@@ -15,8 +18,12 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "WS Inovações | Consórcio de carro",
-  description:
-    "Landing page de captação para consórcio de carro da WS Inovações.",
+  description: "Landing page de captação para consórcio de carro da WS Inovações.",
+  icons: {
+    icon: [{ url: logoSymbol.src, type: "image/png" }],
+    shortcut: [{ url: logoSymbol.src, type: "image/png" }],
+    apple: [{ url: logoSymbol.src, type: "image/png" }],
+  },
 };
 
 export default function RootLayout({

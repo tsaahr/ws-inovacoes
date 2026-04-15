@@ -1,10 +1,15 @@
+import { SmartWhatsAppLink } from "@/components/landing/smart-whatsapp-link";
 import { Button } from "@/components/ui/button";
 
 type FinalCtaBannerProps = {
-  whatsappHref: string;
+  ownerPhone: string;
+  whatsappMessage: string;
 };
 
-export function FinalCtaBanner({ whatsappHref }: FinalCtaBannerProps) {
+export function FinalCtaBanner({
+  ownerPhone,
+  whatsappMessage,
+}: FinalCtaBannerProps) {
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-6 rounded-lg bg-[linear-gradient(135deg,rgba(13,31,60,1),rgba(26,58,107,0.96),rgba(0,153,214,0.78))] px-6 py-16 text-center text-white md:px-8">
       <h2 className="max-w-3xl text-3xl font-semibold leading-tight md:text-5xl">
@@ -23,9 +28,9 @@ export function FinalCtaBanner({ whatsappHref }: FinalCtaBannerProps) {
           variant="outline"
           className="border-white/70 bg-white/10 text-white hover:bg-white hover:text-brand-dark"
         >
-          <a href={whatsappHref} target="_blank" rel="noreferrer">
+          <SmartWhatsAppLink phone={ownerPhone} message={whatsappMessage}>
             Falar no WhatsApp
-          </a>
+          </SmartWhatsAppLink>
         </Button>
       </div>
     </div>
