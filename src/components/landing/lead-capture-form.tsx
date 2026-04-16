@@ -140,10 +140,10 @@ export function LeadCaptureForm() {
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="rounded-lg border bg-card p-5 shadow-sm md:p-6"
+      className="rounded-lg border bg-card p-4 shadow-sm sm:p-5 md:p-6"
       noValidate
     >
-      <FieldGroup className="grid gap-4 md:grid-cols-2">
+      <FieldGroup className="grid gap-3.5 md:grid-cols-2 md:gap-4">
         <Field data-invalid={Boolean(errors.name)}>
           <FieldLabel htmlFor="name">Nome</FieldLabel>
           <Input
@@ -288,7 +288,7 @@ export function LeadCaptureForm() {
           type="submit"
           size="lg"
           disabled={isSubmitting}
-          className="w-full md:col-span-2"
+          className="mt-1 w-full md:col-span-2"
         >
           {isSubmitting ? (
             <Loader2Icon data-icon="inline-start" className="animate-spin" />

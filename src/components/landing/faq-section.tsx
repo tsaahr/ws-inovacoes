@@ -40,10 +40,10 @@ const faqs = [
 
 export function FaqSection() {
   return (
-    <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[0.9fr_1.1fr]">
+    <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[0.9fr_1.1fr] md:gap-10">
       <div className="flex flex-col gap-4">
         <p className="text-sm font-semibold uppercase text-brand-blue">FAQ</p>
-        <h2 className="text-3xl font-semibold leading-tight text-brand-dark md:text-5xl">
+        <h2 className="text-3xl font-semibold leading-tight text-brand-dark sm:text-4xl md:text-5xl">
           As respostas mais importantes antes de entrar no seu consórcio.
         </h2>
       </div>
@@ -51,12 +51,12 @@ export function FaqSection() {
         type="single"
         collapsible
         defaultValue="faq-0"
-        className="w-full rounded-lg border border-brand-silver/45 bg-background px-5"
+        className="w-full rounded-lg border border-brand-silver/45 bg-background px-4 sm:px-5"
       >
         {faqs.map((faq, index) => (
           <AccordionItem key={faq.question} value={`faq-${index}`}>
             <AccordionTrigger>{faq.question}</AccordionTrigger>
-            <AccordionContent className="whitespace-pre-line text-base leading-7">
+            <AccordionContent className="whitespace-pre-line text-sm leading-6 sm:text-base sm:leading-7">
               {faq.answer}
             </AccordionContent>
           </AccordionItem>

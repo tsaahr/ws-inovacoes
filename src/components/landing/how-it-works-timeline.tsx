@@ -46,7 +46,7 @@ export function HowItWorksTimeline() {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
-      className="relative grid gap-8 lg:grid-cols-4 lg:gap-6"
+      className="relative grid gap-6 lg:grid-cols-4 lg:gap-6"
     >
       <div className="absolute bottom-4 left-5 top-4 w-px bg-brand-silver/45 lg:hidden" />
       <div className="absolute left-12 right-12 top-8 hidden h-px bg-brand-silver/45 lg:block" />
@@ -65,19 +65,19 @@ export function HowItWorksTimeline() {
               ease: "easeOut",
               delay: index * 0.15,
             }}
-            className="relative flex gap-4 lg:flex-col lg:items-center lg:text-center"
+            className="relative flex gap-3.5 sm:gap-4 lg:flex-col lg:items-center lg:text-center"
           >
-            <div className="relative z-10 flex size-10 shrink-0 items-center justify-center rounded-full bg-brand-blue text-white shadow-sm lg:size-16">
+            <div className="relative z-10 flex size-9 shrink-0 items-center justify-center rounded-full bg-brand-blue text-white shadow-sm sm:size-10 lg:size-16">
               <Icon />
             </div>
-            <div className="rounded-lg bg-background/90 p-5 shadow-sm ring-1 ring-brand-silver/35 lg:min-h-[220px]">
-              <p className="text-sm font-semibold uppercase tracking-wide text-brand-blue">
+            <div className="rounded-lg bg-background/90 p-4 shadow-sm ring-1 ring-brand-silver/35 sm:p-5 lg:min-h-[220px]">
+              <p className="text-xs font-semibold uppercase tracking-wide text-brand-blue sm:text-sm">
                 Etapa {index + 1}
               </p>
-              <h3 className="mt-3 text-xl font-semibold text-brand-dark">
+              <h3 className="mt-2.5 text-lg font-semibold text-brand-dark sm:mt-3 sm:text-xl">
                 {step.title}
               </h3>
-              <p className="mt-3 leading-7 text-muted-foreground">
+              <p className="mt-2.5 text-sm leading-6 text-muted-foreground sm:mt-3 sm:text-base sm:leading-7">
                 {step.description}
               </p>
             </div>

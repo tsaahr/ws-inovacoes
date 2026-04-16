@@ -58,11 +58,11 @@ export function SiteNavbar({
       ref={navbarRef}
       className="fixed inset-x-0 top-0 z-50 bg-brand-dark/80 backdrop-blur-md"
     >
-      <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between gap-3 px-4 sm:px-6 md:gap-5 md:px-8 lg:h-20 xl:px-10">
+      <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between gap-2 px-4 sm:px-6 md:gap-5 md:px-8 lg:h-20 xl:px-10">
         <a
           href="#inicio"
           aria-label="Voltar para o início"
-          className="flex shrink-0 items-center gap-2 md:gap-3"
+          className="flex shrink-0 items-center gap-1.5 md:gap-3"
           onClick={closeMenu}
         >
           <Image
@@ -71,15 +71,10 @@ export function SiteNavbar({
             width={219}
             height={148}
             priority
-            className="h-[42px] w-auto brightness-0 invert md:h-[48px] lg:h-[56px] xl:h-[60px]"
+            className="h-[38px] w-auto brightness-0 invert sm:h-[42px] md:h-[48px] lg:h-[56px] xl:h-[60px]"
           />
-          <span className="hidden flex-col leading-none text-white md:flex">
-            <span className="text-base font-semibold tracking-tight lg:text-lg xl:text-[1.2rem]">
-              WS Inovações
-            </span>
-            <span className="mt-1 text-[10px] uppercase tracking-[0.22em] text-white/58 lg:text-[11px]">
-              Consultoria em Crédito
-            </span>
+          <span className="hidden text-base font-semibold tracking-tight text-white md:block lg:text-lg xl:text-[1.2rem]">
+            WS Inovações
           </span>
         </a>
 
@@ -102,13 +97,14 @@ export function SiteNavbar({
           <Button
             asChild
             size="sm"
-            className="h-9 px-3 text-xs whitespace-nowrap sm:text-sm lg:h-10 lg:px-4"
+            className="h-8 px-2.5 text-[11px] whitespace-nowrap sm:h-9 sm:px-3 sm:text-sm lg:h-10 lg:px-4"
           >
             <SmartWhatsAppLink
               phone={ownerPhone}
               message={whatsappMessage}
             >
-              Falar no WhatsApp
+              <span className="sm:hidden">WhatsApp</span>
+              <span className="hidden sm:inline">Falar no WhatsApp</span>
             </SmartWhatsAppLink>
           </Button>
 

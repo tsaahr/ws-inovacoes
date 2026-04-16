@@ -58,7 +58,7 @@ export function InstagramFeedSection({ feed }: InstagramFeedSectionProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="px-6 py-20 md:px-8"
+      className="px-4 py-16 sm:px-6 sm:py-20 md:px-8"
     >
       <div className="mx-auto flex max-w-6xl flex-col gap-10">
         <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
@@ -66,7 +66,7 @@ export function InstagramFeedSection({ feed }: InstagramFeedSectionProps) {
             <p className="text-sm font-semibold uppercase text-brand-blue">
               Instagram
             </p>
-            <h2 className="text-3xl font-semibold leading-tight text-brand-dark md:text-5xl">
+            <h2 className="text-3xl font-semibold leading-tight text-brand-dark sm:text-4xl md:text-5xl">
               Acompanhe a WS no Instagram
             </h2>
           </div>
@@ -102,7 +102,7 @@ export function InstagramFeedSection({ feed }: InstagramFeedSectionProps) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 gap-4 md:grid-cols-3"
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3"
         >
           {feed.posts.map((post) => (
             <motion.a

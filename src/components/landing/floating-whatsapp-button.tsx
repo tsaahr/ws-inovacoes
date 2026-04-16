@@ -41,7 +41,7 @@ export function FloatingWhatsAppButton({
       message={message}
       aria-label="Chamar no WhatsApp"
       className={cn(
-        "fixed bottom-4 right-4 z-40 flex size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_18px_40px_rgba(37,211,102,0.38)] ring-4 ring-white/90 transition-transform duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white sm:bottom-5 sm:right-5 sm:size-16 lg:bottom-7 lg:right-7 lg:size-[4.5rem]",
+        "fixed z-40 flex size-[3.25rem] items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_18px_40px_rgba(37,211,102,0.38)] ring-4 ring-white/90 transition-transform duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white [bottom:max(0.85rem,env(safe-area-inset-bottom))] [right:max(0.85rem,env(safe-area-inset-right))] sm:size-16 sm:[bottom:max(1rem,env(safe-area-inset-bottom))] sm:[right:max(1rem,env(safe-area-inset-right))] lg:size-[4.5rem] lg:[bottom:max(1.5rem,env(safe-area-inset-bottom))] lg:[right:max(1.5rem,env(safe-area-inset-right))]",
         className,
       )}
     >

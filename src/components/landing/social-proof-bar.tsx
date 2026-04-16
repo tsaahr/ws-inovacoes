@@ -105,7 +105,7 @@ export function SocialProofBar() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="grid grid-cols-3 gap-3 py-8 text-white sm:gap-5 sm:py-10 md:justify-items-center md:gap-6 md:py-12"
+        className="grid grid-cols-3 gap-2 py-6 text-white sm:gap-5 sm:py-10 md:justify-items-center md:gap-6 md:py-12"
       >
         {stats.map((stat, index) => {
           const Icon = stat.icon;
@@ -116,16 +116,16 @@ export function SocialProofBar() {
               variants={itemVariants}
               className="mx-auto flex min-w-0 w-full flex-col items-center gap-2 text-center sm:gap-3"
             >
-              <div className="flex size-10 shrink-0 items-center justify-center rounded-md bg-white/10 text-white sm:size-12">
+              <div className="flex size-9 shrink-0 items-center justify-center rounded-md bg-white/10 text-white sm:size-12">
                 <Icon className="size-4 sm:size-5" />
               </div>
               <div className="flex flex-col gap-1">
-                <strong className="text-2xl font-semibold tracking-tight sm:text-3xl">
+                <strong className="text-xl font-semibold tracking-tight sm:text-3xl">
                   {stat.prefix}
                   {counts[index] ?? 0}
                   {stat.suffix}
                 </strong>
-                <span className="text-[11px] leading-4 text-white/74 sm:text-sm sm:leading-6">
+                <span className="mx-auto max-w-[5.75rem] text-[10px] leading-4 text-white/74 sm:max-w-none sm:text-sm sm:leading-6">
                   {stat.label}
                 </span>
               </div>

@@ -26,9 +26,9 @@ export function SiteFooter({
 }: SiteFooterProps) {
   return (
     <footer className="bg-brand-dark text-white">
-      <div className="mx-auto grid max-w-6xl gap-10 px-6 py-16 md:grid-cols-3 md:px-8">
-        <div className="flex flex-col gap-4">
-          <div className="flex items-center gap-3">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 sm:py-16 md:grid-cols-3 md:px-8">
+        <div className="flex flex-col gap-4 text-center md:text-left">
+          <div className="flex items-center justify-center gap-3 md:justify-start">
             <Image
               src={logoSymbol}
               alt="Símbolo da WS Inovações"
@@ -36,19 +36,14 @@ export function SiteFooter({
               height={148}
               className="h-12 w-auto brightness-0 invert"
             />
-            <div className="flex flex-col leading-none">
-              <span className="text-lg font-semibold">WS Inovações</span>
-              <span className="mt-1 text-[11px] uppercase tracking-[0.22em] text-white/58">
-                Consultoria em Crédito
-              </span>
-            </div>
+            <span className="text-lg font-semibold">WS Inovações</span>
           </div>
           <p className="max-w-sm leading-7 text-white/72">
             Consórcios com ética, transparência e credibilidade.
           </p>
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 text-center md:text-left">
           <h3 className="text-sm font-semibold uppercase tracking-wide text-white/68">
             Links rápidos
           </h3>
@@ -65,7 +60,7 @@ export function SiteFooter({
           </div>
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 text-center md:text-left">
           <h3 className="text-sm font-semibold uppercase tracking-wide text-white/68">
             Contato
           </h3>
@@ -73,7 +68,7 @@ export function SiteFooter({
             <SmartWhatsAppLink
               phone={ownerPhone}
               message={whatsappMessage}
-              className="flex items-center gap-2 transition-colors hover:text-white"
+              className="flex items-center justify-center gap-2 transition-colors hover:text-white md:justify-start"
             >
               <MessageCircle />
               WhatsApp
@@ -82,12 +77,12 @@ export function SiteFooter({
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-2 transition-colors hover:text-white"
+              className="flex items-center justify-center gap-2 transition-colors hover:text-white md:justify-start"
             >
               <Camera />
               Instagram
             </a>
-            <span className="flex items-center gap-2">
+            <span className="flex items-center justify-center gap-2 md:justify-start">
               <MapPin />
               Rio Grande / RS
             </span>

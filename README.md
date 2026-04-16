@@ -15,7 +15,9 @@ As CTAs públicas de WhatsApp agora usam um link inteligente:
 
 A marca também passou a ser usada como ícone da aba, e a landing ganhou um botão flutuante de WhatsApp fixo no canto inferior direito.
 
-A copy do hero foi ampliada para posicionar a WS Inovações além de carro, incluindo também imóvel e investimento.
+A copy do hero foi ampliada para posicionar a WS Inovações além de carro, incluindo também imóvel e investimento. A seção institucional usa `foto3.jpeg` com enquadramento responsivo mais limpo, o topo e o rodapé mostram só o nome da marca, e o simulador exibe crédito, parcela e modelo sem mostrar prazo em meses.
+
+Nesta etapa, a landing também recebeu uma rodada de foco mobile: hero mais compacto, CTAs em largura total no celular, espaçamentos menores nas seções, navbar mais enxuta, botão flutuante respeitando safe area, carregamento inicial menos dependente de blocos abaixo da dobra e a seção "Sobre" reorganizada com uma estrutura mais clássica de foto + texto, usando CSS dedicado para manter a imagem inteira visível e empilhar corretamente no mobile.
 
 ## Stack
 

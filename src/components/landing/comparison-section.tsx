@@ -41,19 +41,19 @@ export function ComparisonSection() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="mx-auto flex max-w-6xl flex-col gap-8"
+      className="mx-auto flex max-w-6xl flex-col gap-6 sm:gap-8"
     >
-      <div className="flex max-w-3xl flex-col gap-4">
+      <div className="flex max-w-3xl flex-col gap-3 sm:gap-4">
         <Badge
           variant="secondary"
-          className="w-fit rounded-full bg-brand-blue/10 px-4 py-1 text-sm text-brand-blue"
+          className="w-fit rounded-full bg-brand-blue/10 px-4 py-1 text-xs text-brand-blue sm:text-sm"
         >
           Entenda a diferença
         </Badge>
-        <h2 className="text-3xl font-semibold leading-tight text-brand-dark md:text-5xl">
+        <h2 className="text-3xl font-semibold leading-tight text-brand-dark sm:text-4xl md:text-5xl">
           Consórcio vs Financiamento
         </h2>
-        <p className="text-lg leading-8 text-muted-foreground">
+        <p className="text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">
           Veja na prática por que o consórcio custa muito menos no longo prazo.
         </p>
       </div>
@@ -71,17 +71,17 @@ export function ComparisonSection() {
           </span>
 
           <Card className="flex h-full w-full flex-col rounded-xl border-2 border-brand-blue shadow-none">
-            <CardHeader className="pb-4">
+            <CardHeader className="px-4 pb-4 pt-5 sm:px-6">
               <div className="flex items-center gap-3">
                 <span className="size-2 rounded-full bg-brand-blue" />
                 <p className="font-medium text-brand-dark">Consórcio WS</p>
               </div>
             </CardHeader>
-            <CardContent className="flex flex-1 flex-col gap-4">
+            <CardContent className="flex flex-1 flex-col gap-3 px-4 pb-4 sm:gap-4 sm:px-6 sm:pb-6">
               {comparisonItems.map((item) => (
                 <div
                   key={item.label}
-                  className="flex min-h-[60px] items-start gap-3 rounded-lg border border-emerald-100/80 bg-emerald-50/70 px-3 py-3"
+                  className="flex min-h-[56px] items-start gap-3 rounded-lg border border-emerald-100/80 bg-emerald-50/70 px-3 py-3"
                 >
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-700" />
                   <div className="min-w-0">
@@ -106,7 +106,7 @@ export function ComparisonSection() {
           className="flex h-full pt-4"
         >
           <Card className="flex h-full w-full flex-col rounded-xl border border-border shadow-none">
-            <CardHeader className="pb-4">
+            <CardHeader className="px-4 pb-4 pt-5 sm:px-6">
               <div className="flex items-center gap-3">
                 <span className="size-2 rounded-full bg-brand-silver" />
                 <p className="font-medium text-muted-foreground">
@@ -114,11 +114,11 @@ export function ComparisonSection() {
                 </p>
               </div>
             </CardHeader>
-            <CardContent className="flex flex-1 flex-col gap-4">
+            <CardContent className="flex flex-1 flex-col gap-3 px-4 pb-4 sm:gap-4 sm:px-6 sm:pb-6">
               {comparisonItems.map((item) => (
                 <div
                   key={item.label}
-                  className="flex min-h-[60px] items-start gap-3 rounded-lg border border-border/70 bg-muted/40 px-3 py-3"
+                  className="flex min-h-[56px] items-start gap-3 rounded-lg border border-border/70 bg-muted/40 px-3 py-3"
                 >
                   <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-400" />
                   <div className="min-w-0">

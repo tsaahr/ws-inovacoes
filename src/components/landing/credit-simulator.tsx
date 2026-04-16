@@ -38,7 +38,9 @@ const CREDIT_PLANS = [
   { model: "VW023", credit: 240000, installment: 1947.0 },
 ] as const;
 
-const DEFAULT_PLAN_INDEX = CREDIT_PLANS.findIndex((plan) => plan.credit === 80000);
+const DEFAULT_PLAN_INDEX = CREDIT_PLANS.findIndex(
+  (plan) => plan.credit === 80000,
+);
 
 export function CreditSimulator() {
   const [selectedIndex, setSelectedIndex] = useState(
@@ -49,19 +51,19 @@ export function CreditSimulator() {
 
   return (
     <Card className="border-brand-silver/60">
-      <CardHeader>
+      <CardHeader className="p-5 sm:p-6">
         <CardTitle>Simule seu crédito</CardTitle>
         <CardDescription>
-          Valores reais da tabela do Plano Acesso Auto, com prazo de 100 meses.
+          Valores reais da tabela do Plano Acesso Auto.
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex flex-col gap-6">
+      <CardContent className="flex flex-col gap-5 p-5 pt-0 sm:gap-6 sm:p-6 sm:pt-0">
         <div className="flex flex-col gap-2">
           <div className="flex items-end justify-between gap-4">
             <span className="text-sm text-muted-foreground">
               Crédito da carta
             </span>
-            <strong className="text-2xl text-brand-dark">
+            <strong className="text-xl text-brand-dark sm:text-2xl">
               {formatCurrency(selectedPlan.credit)}
             </strong>
           </div>
@@ -76,28 +78,23 @@ export function CreditSimulator() {
             aria-label="Valor do crédito"
           />
         </div>
-        <div className="grid gap-3 md:grid-cols-3">
+        <div className="grid gap-3 md:grid-cols-2">
           <div className="rounded-lg bg-muted p-4">
             <p className="text-sm text-muted-foreground">Parcela mensal</p>
-            <p className="mt-2 text-xl font-semibold text-brand-navy">
+            <p className="mt-2 text-lg font-semibold text-brand-navy sm:text-xl">
               {formatCurrency(selectedPlan.installment)}
             </p>
           </div>
           <div className="rounded-lg bg-muted p-4">
-            <p className="text-sm text-muted-foreground">Prazo</p>
-            <p className="mt-2 text-xl font-semibold text-brand-dark">
-              100 meses
-            </p>
-          </div>
-          <div className="rounded-lg bg-muted p-4">
             <p className="text-sm text-muted-foreground">Modelo</p>
-            <p className="mt-2 text-xl font-semibold text-brand-dark">
+            <p className="mt-2 text-lg font-semibold text-brand-dark sm:text-xl">
               {selectedPlan.model}
             </p>
           </div>
         </div>
         <p className="text-sm text-muted-foreground">
-          Tabela usada: Plano Acesso Auto, taxa de 0,22% ao mês. Valores sujeitos a atualização da administradora.
+          Tabela usada: Plano Acesso Auto, taxa de 0,22% ao mês. Valores
+          sujeitos a atualização da administradora.
         </p>
       </CardContent>
     </Card>
