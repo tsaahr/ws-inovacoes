@@ -19,6 +19,7 @@
 - A landing passou por uma rodada específica de otimização para celular: hero mais compacto, CTAs com largura total no mobile, navbar mais enxuta, espaçamentos móveis recalibrados e botão flutuante respeitando safe area.
 - Na seção "Sobre", a composição foi simplificada para um modelo mais previsível: foto em uma coluna, texto em outra e empilhamento no mobile.
 - O carregamento da home ficou mais resiliente em mobile e em links com âncora: o hero não depende mais de esconder no primeiro paint e as seções animadas evitam ficar invisíveis quando já entram no viewport.
+- A seção do Instagram agora usa embed nativo oficial com três posts fixos, carregando `https://www.instagram.com/embed.js` uma única vez e priorizando responsividade em `1 / 2 / 3` colunas conforme a largura.
 - `npm run lint` e `npm run build` passaram após a remoção do CRM, a simplificação do fluxo e os ajustes visuais recentes.
 
 ## [LOG DE ALTERAÇÕES]
@@ -45,7 +46,8 @@
 - `src/components/landing/site-footer.tsx`: removido o subtítulo `Consultoria em Crédito` do rodapé.
 - `src/components/landing/credit-simulator.tsx`: removido o card de prazo e a menção a `100 meses`.
 - `src/components/landing/animated-section.tsx`: animação reestruturada para preservar conteúdo visível quando a seção já entra em viewport no carregamento ou por hash.
-- `src/components/landing/instagram-feed-server-section.tsx`: novo wrapper server para buscar o feed sem deixar a composição da home mais pesada do que precisa.
+- `src/components/landing/instagram-feed-section.tsx`: seção do Instagram reescrita para usar embed nativo oficial com os três links fixos e layout extremamente responsivo.
+- `src/components/landing/instagram-feed-server-section.tsx`: simplificado para apenas renderizar a seção client de embed, sem fetch do feed antigo.
 - `src/components/landing/lead-capture-form.tsx`, `social-proof-bar.tsx`, `services-grid.tsx`, `comparison-section.tsx`, `how-it-works-timeline.tsx`, `faq-section.tsx`, `final-cta-banner.tsx`, `floating-whatsapp-button.tsx` e `site-footer.tsx`: refinados para densidade, toque e leitura melhores no mobile.
 - `src/proxy.ts`: removido.
 - `src/lib/admin-data.ts`: removido.
@@ -65,6 +67,7 @@
 - A `foto3.jpeg` é uma arte vertical com texto incorporado. Depois de vários testes de crop, a decisão atual é priorizar visibilidade integral da imagem usando `object-contain` e um layout mais simples.
 - A seção "Sobre" deixou de depender de composições experimentais em Tailwind puro; a versão atual usa classes semânticas em CSS para facilitar futuros ajustes finos.
 - `whileInView` puro com estado inicial escondido pode gerar páginas aparentemente vazias em capturas/headless e em alguns cenários de âncora. A solução atual usa controles do Motion para esconder só o que realmente começa fora do viewport.
+- O embed nativo do Instagram voltou a ser a estratégia ativa. O render final continua dependendo de os posts estarem públicos, de o script externo carregar e de o navegador não bloquear conteúdo de terceiros.
 
 ## [PRÓXIMOS PASSOS]
 
@@ -77,6 +80,7 @@
   - e-mail
 - Validar o comportamento do link de WhatsApp em desktop e mobile real depois do deploy.
 - Validar visualmente o botão flutuante de WhatsApp em mobile e desktop para confirmar que ele não cobre CTA importante nem campo do formulário.
+- Validar os três embeds do Instagram em mobile real e em produção/Vercel, especialmente para confirmar largura, altura e tempo de carregamento.
 - Se a próxima rodada for de acabamento visual, continuar a otimização mobile começando por hero, formulário, comparação e FAQ.
 - Se futuramente for criado um CRM com Supabase, começar reaproveitando o schema atual de lead em `src/lib/leads.ts`.
 
@@ -99,6 +103,6 @@
 - O favicon da aplicação agora vem do `logo-symbol.png` via metadata em `src/app/layout.tsx`, sem depender de `favicon.ico`.
 - O hero principal vive em `src/app/page.tsx`; ajustes de posicionamento de marca e promessa comercial devem começar ali.
 - A seção institucional agora usa proporções e `object-position` por breakpoint para segurar melhor fotos verticais sem criar barras de fundo visíveis.
-- O feed do Instagram agora deve ser buscado em `src/components/landing/instagram-feed-server-section.tsx`, deixando `src/app/page.tsx` mais leve e evitando acoplamento desnecessário na composição principal.
+- A seção de Instagram vive em `src/components/landing/instagram-feed-section.tsx`, com um wrapper fino em `src/components/landing/instagram-feed-server-section.tsx` só para manter a composição da home intacta.
 - O comportamento de entrada das seções está centralizado em `src/components/landing/animated-section.tsx`; qualquer ajuste entre performance, visibilidade inicial e motion deve começar por esse arquivo.
 - Se o projeto ganhar Supabase depois, a recomendação é não misturar novamente CRM + Apps Script + outro CRM externo. Escolher uma fonte principal de gestão e manter o restante como canais de notificação.

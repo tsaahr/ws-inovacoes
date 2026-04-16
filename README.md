@@ -19,6 +19,8 @@ A copy do hero foi ampliada para posicionar a WS Inovações além de carro, inc
 
 Nesta etapa, a landing também recebeu uma rodada de foco mobile: hero mais compacto, CTAs em largura total no celular, espaçamentos menores nas seções, navbar mais enxuta, botão flutuante respeitando safe area, carregamento inicial menos dependente de blocos abaixo da dobra e a seção "Sobre" reorganizada com uma estrutura mais clássica de foto + texto, usando CSS dedicado para manter a imagem inteira visível e empilhar corretamente no mobile.
 
+A seção do Instagram voltou a usar embed nativo oficial, agora com três posts fixos e layout mais defensivo para mobile, tablet e desktop.
+
 ## Stack
 
 - Next.js 16 App Router com Turbopack
