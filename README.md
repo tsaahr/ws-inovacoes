@@ -13,13 +13,19 @@ As CTAs públicas de WhatsApp agora usam um link inteligente:
 - desktop: `web.whatsapp.com/send`
 - mobile: `wa.me`
 
-A marca também passou a ser usada como ícone da aba, e a landing ganhou um botão flutuante de WhatsApp fixo no canto inferior direito.
+A marca também passou a ser usada como ícone da aba, o título da guia fica apenas como `WS Inovações`, e a landing ganhou um botão flutuante de WhatsApp no canto inferior direito, exibido após a primeira seção para não cobrir a prova social do hero.
 
 A copy do hero foi ampliada para posicionar a WS Inovações além de carro, incluindo também imóvel e investimento. A seção institucional usa `foto3.jpeg` com enquadramento responsivo mais limpo, o topo e o rodapé mostram só o nome da marca, e o simulador exibe crédito, parcela e modelo sem mostrar prazo em meses.
 
-Nesta etapa, a landing também recebeu uma rodada de foco mobile: hero mais compacto, CTAs em largura total no celular, espaçamentos menores nas seções, navbar mais enxuta, botão flutuante respeitando safe area, carregamento inicial menos dependente de blocos abaixo da dobra e a seção "Sobre" reorganizada com uma estrutura mais clássica de foto + texto, usando CSS dedicado para manter a imagem inteira visível e empilhar corretamente no mobile.
+Nesta etapa, a landing também recebeu uma rodada mais agressiva de foco mobile: navbar menor, hero mais compacto, prova social integrada ao `#inicio` em uma faixa azul logo abaixo da imagem principal, formulário em grid denso de 2 colunas no celular, seção "Sobre" com título centralizado acima do bloco institucional, foto em recorte quadrado com rosto e nome visíveis no mobile e no desktop, FAQ com lista compacta + resposta em sheet no mobile, Instagram em carrossel com um embed por vez e setas para avançar/voltar posts, além de rodapé reorganizado em bloco curto. O desktop e o tablet foram preservados o máximo possível.
 
 A seção do Instagram voltou a usar embed nativo oficial, agora com três posts fixos e layout mais defensivo para mobile, tablet e desktop.
+
+A home usa offset de âncoras compatível com o menu fixo: as seções têm `scroll-margin-top` baseado na altura do cabeçalho com um respiro extra responsivo, e a navegação por hash recalcula a posição após a hidratação para parar no título visível da seção sem ficar coberta pela navbar. No mobile, o cálculo mede apenas a barra fixa do topo, não o painel aberto do menu, evitando que a seção role para o centro da tela.
+
+No desktop, as seções seguem fluxo contínuo com altura por conteúdo e sem scroll isolado em cada seção. A exceção deliberada é o `#inicio`, que pode ocupar entre 90% e 100% da tela junto com a prova social para criar uma primeira dobra mais forte. As demais seções usam altura natural para reduzir espaços vazios e revelar o início do próximo bloco. A seção de simulação também ganhou um plano azul atrás do formulário para reforçar contraste e acabamento visual.
+
+O rodapé é renderizado em layout próprio, sem wrapper de viewport, e o CTA final agora usa fundo escuro compacto para evitar áreas brancas sobrando no fim da página.
 
 ## Stack
 
@@ -28,6 +34,7 @@ A seção do Instagram voltou a usar embed nativo oficial, agora com três posts
 - Tailwind CSS v4 CSS-first
 - shadcn/ui estilo `new-york`
 - `motion`, `tw-animate-css`, Radix UI, React Hook Form, Zod e Sonner
+- `@radix-ui/react-dialog` para o `Sheet` do FAQ mobile
 
 ## Como Rodar
 
@@ -188,6 +195,19 @@ O formulário coleta:
 - Valor do crédito
 - Parcela ideal
 - Cidade/Estado
+
+No mobile, ele passa a usar um grid denso de duas colunas para reduzir altura sem mudar a validação nem o payload enviado para `/api/leads`.
+
+## Estratégia Mobile
+
+- altura da navbar reduzida no celular para ampliar a viewport útil
+- hero com `ViewportSectionBody` em modo mobile estrito quando cabe na viewport útil
+- demais seções em altura natural, com densidade mobile ajustada para leitura rápida
+- seção "Sobre" no mobile em ordem empilhada: título, texto, tópicos com ícones e foto quadrada do Diretor Comercial, com crop priorizando rosto e nome
+- no desktop, a seção "Sobre" mantém layout lado a lado, mas a foto também usa o recorte quadrado para dar mais presença ao Diretor Comercial
+- fallback natural preservado quando uma interação ou embed ultrapassa a altura disponível
+- FAQ mobile com `Sheet`
+- Instagram mobile com carrossel nativo, um post por vez e setas de avançar/voltar
 
 ## Observação
 

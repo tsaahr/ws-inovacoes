@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "WS Inovações | Consórcio de carro",
+  title: "WS Inovações",
   description: "Landing page de captação para consórcio de carro da WS Inovações.",
   icons: {
     icon: [{ url: logoSymbol.src, type: "image/png" }],

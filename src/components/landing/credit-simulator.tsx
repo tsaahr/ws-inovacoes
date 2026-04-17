@@ -51,19 +51,19 @@ export function CreditSimulator() {
 
   return (
     <Card className="border-brand-silver/60">
-      <CardHeader className="p-5 sm:p-6">
-        <CardTitle>Simule seu crédito</CardTitle>
-        <CardDescription>
+      <CardHeader className="gap-1.5 p-3 sm:p-5">
+        <CardTitle className="text-base sm:text-xl">Simule seu crédito</CardTitle>
+        <CardDescription className="text-xs leading-5 sm:text-sm">
           Valores reais da tabela do Plano Acesso Auto.
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex flex-col gap-5 p-5 pt-0 sm:gap-6 sm:p-6 sm:pt-0">
-        <div className="flex flex-col gap-2">
-          <div className="flex items-end justify-between gap-4">
-            <span className="text-sm text-muted-foreground">
+      <CardContent className="flex flex-col gap-3 p-3 pt-0 sm:gap-5 sm:p-5 sm:pt-0">
+        <div className="flex flex-col gap-1.5 sm:gap-2">
+          <div className="flex items-end justify-between gap-3">
+            <span className="text-[11px] text-muted-foreground sm:text-sm">
               Crédito da carta
             </span>
-            <strong className="text-xl text-brand-dark sm:text-2xl">
+            <strong className="text-base text-brand-dark sm:text-xl">
               {formatCurrency(selectedPlan.credit)}
             </strong>
           </div>
@@ -72,27 +72,27 @@ export function CreditSimulator() {
             min={0}
             max={CREDIT_PLANS.length - 1}
             step={1}
-            onValueChange={(value) =>
-              setSelectedIndex(value[0] ?? selectedIndex)
-            }
+            onValueChange={(value) => setSelectedIndex(value[0] ?? selectedIndex)}
             aria-label="Valor do crédito"
           />
         </div>
-        <div className="grid gap-3 md:grid-cols-2">
-          <div className="rounded-lg bg-muted p-4">
-            <p className="text-sm text-muted-foreground">Parcela mensal</p>
-            <p className="mt-2 text-lg font-semibold text-brand-navy sm:text-xl">
+        <div className="grid gap-2.5 md:grid-cols-2 sm:gap-3">
+          <div className="rounded-lg bg-muted p-3 sm:p-4">
+            <p className="text-[11px] text-muted-foreground sm:text-sm">
+              Parcela mensal
+            </p>
+            <p className="mt-1.5 text-sm font-semibold text-brand-navy sm:mt-2 sm:text-lg">
               {formatCurrency(selectedPlan.installment)}
             </p>
           </div>
-          <div className="rounded-lg bg-muted p-4">
-            <p className="text-sm text-muted-foreground">Modelo</p>
-            <p className="mt-2 text-lg font-semibold text-brand-dark sm:text-xl">
+          <div className="rounded-lg bg-muted p-3 sm:p-4">
+            <p className="text-[11px] text-muted-foreground sm:text-sm">Modelo</p>
+            <p className="mt-1.5 text-sm font-semibold text-brand-dark sm:mt-2 sm:text-base">
               {selectedPlan.model}
             </p>
           </div>
         </div>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-[11px] leading-[1.125rem] text-muted-foreground sm:text-sm sm:leading-6">
           Tabela usada: Plano Acesso Auto, taxa de 0,22% ao mês. Valores
           sujeitos a atualização da administradora.
         </p>

@@ -1,9 +1,21 @@
+"use client";
+
+import { ChevronRight } from "lucide-react";
+import { useMemo, useState } from "react";
+
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 
 const faqs = [
   {
@@ -39,29 +51,102 @@ const faqs = [
 ] as const;
 
 export function FaqSection() {
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
+  const selectedFaq = useMemo(
+    () => (selectedIndex === null ? null : faqs[selectedIndex] ?? null),
+    [selectedIndex],
+  );
+
   return (
-    <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[0.9fr_1.1fr] md:gap-10">
-      <div className="flex flex-col gap-4">
-        <p className="text-sm font-semibold uppercase text-brand-blue">FAQ</p>
-        <h2 className="text-3xl font-semibold leading-tight text-brand-dark sm:text-4xl md:text-5xl">
-          As respostas mais importantes antes de entrar no seu consórcio.
-        </h2>
+    <>
+      <div className="mx-auto w-full max-w-6xl">
+        <div className="flex flex-col gap-4 md:hidden">
+          <div className="flex flex-col gap-2.5">
+            <p className="text-sm font-semibold uppercase text-brand-blue">FAQ</p>
+            <h2 className="text-[1.55rem] font-semibold leading-[1.05] text-brand-dark">
+              Tire as dúvidas principais antes de entrar no consórcio.
+            </h2>
+            <p className="text-xs leading-[1.375rem] text-muted-foreground">
+              Toque em uma pergunta para abrir a resposta completa.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2.5">
+            {faqs.map((faq, index) => (
+              <button
+                key={faq.question}
+                type="button"
+                className="flex min-h-[5.6rem] flex-col items-start justify-between rounded-lg border border-brand-silver/45 bg-background p-3 text-left shadow-sm transition-colors hover:border-brand-blue/45 hover:bg-secondary/50"
+                onClick={() => setSelectedIndex(index)}
+              >
+                <span className="text-[10px] font-semibold uppercase tracking-wide text-brand-blue">
+                  Pergunta {index + 1}
+                </span>
+                <span className="text-sm font-medium leading-5 text-brand-dark">
+                  {faq.question}
+                </span>
+                <span className="inline-flex items-center gap-1 text-[11px] font-medium text-brand-blue">
+                  Ler resposta
+                  <ChevronRight className="size-3.5" />
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="hidden md:grid md:grid-cols-[0.88fr_1.12fr] md:gap-8">
+          <div className="flex flex-col gap-4">
+            <p className="text-sm font-semibold uppercase text-brand-blue">FAQ</p>
+            <h2 className="text-2xl font-semibold leading-tight text-brand-dark sm:text-3xl md:text-4xl xl:text-5xl">
+              As respostas mais importantes antes de entrar no seu consórcio.
+            </h2>
+          </div>
+          <Accordion
+            type="single"
+            collapsible
+            defaultValue="faq-0"
+            className="w-full rounded-lg border border-brand-silver/45 bg-background px-3 sm:px-4"
+          >
+            {faqs.map((faq, index) => (
+              <AccordionItem key={faq.question} value={`faq-${index}`}>
+                <AccordionTrigger>{faq.question}</AccordionTrigger>
+                <AccordionContent className="whitespace-pre-line text-sm leading-6 sm:text-base sm:leading-7">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
       </div>
-      <Accordion
-        type="single"
-        collapsible
-        defaultValue="faq-0"
-        className="w-full rounded-lg border border-brand-silver/45 bg-background px-4 sm:px-5"
+
+      <Sheet
+        open={selectedIndex !== null}
+        onOpenChange={(open) => {
+          if (!open) {
+            setSelectedIndex(null);
+          }
+        }}
       >
-        {faqs.map((faq, index) => (
-          <AccordionItem key={faq.question} value={`faq-${index}`}>
-            <AccordionTrigger>{faq.question}</AccordionTrigger>
-            <AccordionContent className="whitespace-pre-line text-sm leading-6 sm:text-base sm:leading-7">
-              {faq.answer}
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
-    </div>
+        <SheetContent
+          side="bottom"
+          className="max-h-[calc(100svh-var(--site-navbar-offset)-0.5rem)] rounded-t-2xl px-0 pb-0"
+        >
+          <SheetHeader className="gap-2 border-b border-border/80 pb-3">
+            <SheetTitle className="text-left text-base text-brand-dark">
+              {selectedFaq?.question ?? "Pergunta"}
+            </SheetTitle>
+            <SheetDescription className="text-left text-xs leading-5">
+              Resposta completa da WS Inovações.
+            </SheetDescription>
+          </SheetHeader>
+          <div className="overflow-y-auto px-4 pb-6 pt-4">
+            <p className="whitespace-pre-line text-sm leading-6 text-muted-foreground">
+              {selectedFaq?.answer}
+            </p>
+          </div>
+        </SheetContent>
+      </Sheet>
+    </>
   );
 }

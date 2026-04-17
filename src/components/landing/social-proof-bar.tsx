@@ -2,7 +2,6 @@
 
 import { Banknote, CalendarDays, Users } from "lucide-react";
 import { motion, type Variants } from "motion/react";
-import { useEffect, useRef, useState } from "react";
 
 const stats = [
   {
@@ -47,85 +46,33 @@ const itemVariants: Variants = {
 };
 
 export function SocialProofBar() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [hasStarted, setHasStarted] = useState(false);
-  const [counts, setCounts] = useState(() => stats.map(() => 0));
-
-  useEffect(() => {
-    const node = ref.current;
-
-    if (!node) {
-      return undefined;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setHasStarted(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.35 },
-    );
-
-    observer.observe(node);
-
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!hasStarted) {
-      return undefined;
-    }
-
-    const duration = 1400;
-    const start = performance.now();
-    let frame = 0;
-
-    const tick = (now: number) => {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - (1 - progress) * (1 - progress);
-
-      setCounts(stats.map((stat) => Math.round(stat.value * eased)));
-
-      if (progress < 1) {
-        frame = requestAnimationFrame(tick);
-      }
-    };
-
-    frame = requestAnimationFrame(tick);
-
-    return () => cancelAnimationFrame(frame);
-  }, [hasStarted]);
-
   return (
-    <div ref={ref} className="mx-auto w-full max-w-5xl">
+    <div className="mx-auto w-full max-w-5xl">
       <motion.div
         variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        className="grid grid-cols-3 gap-2 py-6 text-white sm:gap-5 sm:py-10 md:justify-items-center md:gap-6 md:py-12"
+        initial="visible"
+        animate="visible"
+        className="grid grid-cols-3 gap-1.5 py-2.5 text-white sm:gap-4 sm:py-3 md:justify-items-center md:gap-6 md:py-4 lg:py-5"
       >
-        {stats.map((stat, index) => {
+        {stats.map((stat) => {
           const Icon = stat.icon;
 
           return (
             <motion.div
               key={stat.label}
               variants={itemVariants}
-              className="mx-auto flex min-w-0 w-full flex-col items-center gap-2 text-center sm:gap-3"
+              className="mx-auto flex min-w-0 w-full flex-col items-center gap-1.5 text-center sm:flex-row sm:justify-center sm:gap-3 sm:text-left"
             >
-              <div className="flex size-9 shrink-0 items-center justify-center rounded-md bg-white/10 text-white sm:size-12">
-                <Icon className="size-4 sm:size-5" />
+              <div className="flex size-7 shrink-0 items-center justify-center rounded-md bg-white/10 text-white sm:size-9 lg:size-10">
+                <Icon className="size-3.5 sm:size-4.5 lg:size-5" />
               </div>
-              <div className="flex flex-col gap-1">
-                <strong className="text-xl font-semibold tracking-tight sm:text-3xl">
+              <div className="flex flex-col gap-0.5">
+                <strong className="text-lg font-semibold tracking-tight sm:text-2xl lg:text-3xl">
                   {stat.prefix}
-                  {counts[index] ?? 0}
+                  {stat.value}
                   {stat.suffix}
                 </strong>
-                <span className="mx-auto max-w-[5.75rem] text-[10px] leading-4 text-white/74 sm:max-w-none sm:text-sm sm:leading-6">
+                <span className="mx-auto max-w-[4.5rem] text-[9px] leading-[0.875rem] text-white/78 sm:mx-0 sm:max-w-[8rem] sm:text-xs sm:leading-5 lg:text-sm lg:leading-6">
                   {stat.label}
                 </span>
               </div>

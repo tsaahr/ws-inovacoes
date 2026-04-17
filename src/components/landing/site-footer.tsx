@@ -25,73 +25,77 @@ export function SiteFooter({
   whatsappMessage,
 }: SiteFooterProps) {
   return (
-    <footer className="bg-brand-dark text-white">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 sm:py-16 md:grid-cols-3 md:px-8">
-        <div className="flex flex-col gap-4 text-center md:text-left">
-          <div className="flex items-center justify-center gap-3 md:justify-start">
-            <Image
-              src={logoSymbol}
-              alt="Símbolo da WS Inovações"
-              width={219}
-              height={148}
-              className="h-12 w-auto brightness-0 invert"
-            />
-            <span className="text-lg font-semibold">WS Inovações</span>
+    <footer className="bg-brand-dark px-4 text-white sm:px-6 md:px-8">
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-7 py-8 sm:py-10 md:py-12">
+        <div className="grid gap-7 md:grid-cols-[1.15fr_0.85fr_1fr] md:gap-10">
+          <div className="flex flex-col gap-3 text-center md:text-left">
+            <div className="flex items-center justify-center gap-2.5 md:justify-start">
+              <Image
+                src={logoSymbol}
+                alt="Símbolo da WS Inovações"
+                width={219}
+                height={148}
+                className="h-10 w-auto brightness-0 invert md:h-12"
+              />
+              <span className="text-base font-semibold md:text-lg">
+                WS Inovações
+              </span>
+            </div>
+            <p className="mx-auto max-w-sm text-sm leading-6 text-white/72 md:mx-0 md:leading-7">
+              Consórcios com ética, transparência e credibilidade.
+            </p>
           </div>
-          <p className="max-w-sm leading-7 text-white/72">
-            Consórcios com ética, transparência e credibilidade.
-          </p>
-        </div>
 
-        <div className="flex flex-col gap-4 text-center md:text-left">
-          <h3 className="text-sm font-semibold uppercase tracking-wide text-white/68">
-            Links rápidos
-          </h3>
-          <div className="flex flex-col gap-3">
-            {quickLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-white/76 transition-colors hover:text-white"
+          <div className="flex flex-col gap-3 text-center md:text-left">
+            <h3 className="text-[11px] font-semibold uppercase tracking-wide text-white/68 md:text-sm">
+              Links rápidos
+            </h3>
+            <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 md:flex-col md:items-start md:gap-3">
+              {quickLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm text-white/76 transition-colors hover:text-white"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-3 text-center md:text-left">
+            <h3 className="text-[11px] font-semibold uppercase tracking-wide text-white/68 md:text-sm">
+              Contato
+            </h3>
+            <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm text-white/76 md:flex-col md:items-start md:gap-3">
+              <SmartWhatsAppLink
+                phone={ownerPhone}
+                message={whatsappMessage}
+                className="inline-flex items-center gap-2 transition-colors hover:text-white"
               >
-                {link.label}
+                <MessageCircle className="size-4" />
+                WhatsApp
+              </SmartWhatsAppLink>
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 transition-colors hover:text-white"
+              >
+                <Camera className="size-4" />
+                Instagram
               </a>
-            ))}
+              <span className="inline-flex items-center gap-2">
+                <MapPin className="size-4" />
+                Rio Grande / RS
+              </span>
+            </div>
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 text-center md:text-left">
-          <h3 className="text-sm font-semibold uppercase tracking-wide text-white/68">
-            Contato
-          </h3>
-          <div className="flex flex-col gap-3 text-white/76">
-            <SmartWhatsAppLink
-              phone={ownerPhone}
-              message={whatsappMessage}
-              className="flex items-center justify-center gap-2 transition-colors hover:text-white md:justify-start"
-            >
-              <MessageCircle />
-              WhatsApp
-            </SmartWhatsAppLink>
-            <a
-              href={INSTAGRAM_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center justify-center gap-2 transition-colors hover:text-white md:justify-start"
-            >
-              <Camera />
-              Instagram
-            </a>
-            <span className="flex items-center justify-center gap-2 md:justify-start">
-              <MapPin />
-              Rio Grande / RS
-            </span>
-          </div>
+        <div className="border-t border-white/10 pt-5 text-center text-[11px] text-white/58 md:text-sm">
+          © 2026 WS Inovações. Todos os direitos reservados.
         </div>
-      </div>
-
-      <div className="border-t border-white/10 px-6 py-5 text-center text-sm text-white/58 md:px-8">
-        © 2025 WS Inovações. Todos os direitos reservados.
       </div>
     </footer>
   );

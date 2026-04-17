@@ -1,6 +1,6 @@
 "use client";
 
-import { CreditCard, FileText, CalendarDays, Trophy } from "lucide-react";
+import { CalendarDays, CreditCard, FileText, Trophy } from "lucide-react";
 import { motion, type Variants } from "motion/react";
 
 const steps = [
@@ -46,9 +46,8 @@ export function HowItWorksTimeline() {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
-      className="relative grid gap-6 lg:grid-cols-4 lg:gap-6"
+      className="relative grid grid-cols-2 gap-2.5 lg:grid-cols-4 lg:gap-5"
     >
-      <div className="absolute bottom-4 left-5 top-4 w-px bg-brand-silver/45 lg:hidden" />
       <div className="absolute left-12 right-12 top-8 hidden h-px bg-brand-silver/45 lg:block" />
 
       {steps.map((step, index) => {
@@ -65,19 +64,19 @@ export function HowItWorksTimeline() {
               ease: "easeOut",
               delay: index * 0.15,
             }}
-            className="relative flex gap-3.5 sm:gap-4 lg:flex-col lg:items-center lg:text-center"
+            className="relative flex flex-col gap-2.5 lg:flex-col lg:items-center lg:gap-3 lg:text-center"
           >
-            <div className="relative z-10 flex size-9 shrink-0 items-center justify-center rounded-full bg-brand-blue text-white shadow-sm sm:size-10 lg:size-16">
-              <Icon />
+            <div className="relative z-10 flex size-8 shrink-0 items-center justify-center rounded-full bg-brand-blue text-white shadow-sm lg:size-14">
+              <Icon className="size-4 lg:size-6" />
             </div>
-            <div className="rounded-lg bg-background/90 p-4 shadow-sm ring-1 ring-brand-silver/35 sm:p-5 lg:min-h-[220px]">
-              <p className="text-xs font-semibold uppercase tracking-wide text-brand-blue sm:text-sm">
+            <div className="rounded-lg bg-background/95 p-3 shadow-sm ring-1 ring-brand-silver/35 lg:min-h-[190px] lg:p-5">
+              <p className="text-[10px] font-semibold uppercase tracking-wide text-brand-blue sm:text-sm">
                 Etapa {index + 1}
               </p>
-              <h3 className="mt-2.5 text-lg font-semibold text-brand-dark sm:mt-3 sm:text-xl">
+              <h3 className="mt-1.5 text-sm font-semibold leading-tight text-brand-dark sm:mt-3 sm:text-lg">
                 {step.title}
               </h3>
-              <p className="mt-2.5 text-sm leading-6 text-muted-foreground sm:mt-3 sm:text-base sm:leading-7">
+              <p className="mt-1.5 text-[11px] leading-[1.125rem] text-muted-foreground sm:mt-3 sm:text-sm sm:leading-7">
                 {step.description}
               </p>
             </div>

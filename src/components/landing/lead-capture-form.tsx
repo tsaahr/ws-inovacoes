@@ -115,15 +115,15 @@ export function LeadCaptureForm() {
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <Card className="border-brand-blue/40 bg-card">
-          <CardHeader>
-            <CardTitle className="text-2xl text-brand-dark">
-              ✅ Recebemos seu contato!
+          <CardHeader className="gap-2 p-4 sm:p-6">
+            <CardTitle className="text-xl text-brand-dark sm:text-2xl">
+              Recebemos seu contato!
             </CardTitle>
-            <CardDescription className="text-base">
+            <CardDescription className="text-sm sm:text-base">
               Em breve nossa equipe entrará em contato.
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-4 pt-0 sm:p-6 sm:pt-0">
             <p className="text-sm text-muted-foreground">
               Obrigado por confiar na WS Inovações para planejar seu crédito.
             </p>
@@ -140,41 +140,57 @@ export function LeadCaptureForm() {
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="rounded-lg border bg-card p-4 shadow-sm sm:p-5 md:p-6"
+      className="rounded-lg border bg-card p-3 shadow-sm sm:p-5 md:p-6"
       noValidate
     >
-      <FieldGroup className="grid gap-3.5 md:grid-cols-2 md:gap-4">
-        <Field data-invalid={Boolean(errors.name)}>
-          <FieldLabel htmlFor="name">Nome</FieldLabel>
+      <FieldGroup className="grid grid-cols-2 gap-x-2.5 gap-y-3 sm:gap-4">
+        <Field data-invalid={Boolean(errors.name)} className="gap-1.5">
+          <FieldLabel htmlFor="name" className="text-[11px] sm:text-sm">
+            Nome
+          </FieldLabel>
           <Input
             id="name"
             autoComplete="name"
-            placeholder="Seu nome completo"
+            placeholder="Seu nome"
+            className="h-10 px-2.5 text-sm sm:h-11 sm:px-3"
             aria-invalid={Boolean(errors.name)}
             {...register("name")}
           />
-          {errors.name ? <FieldError>{errors.name.message}</FieldError> : null}
+          {errors.name ? (
+            <FieldError className="text-[11px] leading-4 sm:text-sm">
+              {errors.name.message}
+            </FieldError>
+          ) : null}
         </Field>
 
-        <Field data-invalid={Boolean(errors.email)}>
-          <FieldLabel htmlFor="email">E-mail</FieldLabel>
+        <Field data-invalid={Boolean(errors.email)} className="gap-1.5">
+          <FieldLabel htmlFor="email" className="text-[11px] sm:text-sm">
+            E-mail
+          </FieldLabel>
           <Input
             id="email"
             type="email"
             autoComplete="email"
             placeholder="voce@email.com"
+            className="h-10 px-2.5 text-sm sm:h-11 sm:px-3"
             aria-invalid={Boolean(errors.email)}
             {...register("email")}
           />
-          {errors.email ? <FieldError>{errors.email.message}</FieldError> : null}
+          {errors.email ? (
+            <FieldError className="text-[11px] leading-4 sm:text-sm">
+              {errors.email.message}
+            </FieldError>
+          ) : null}
         </Field>
 
         <Controller
           control={control}
           name="phone"
           render={({ field }) => (
-            <Field data-invalid={Boolean(errors.phone)}>
-              <FieldLabel htmlFor="phone">WhatsApp</FieldLabel>
+            <Field data-invalid={Boolean(errors.phone)} className="gap-1.5">
+              <FieldLabel htmlFor="phone" className="text-[11px] sm:text-sm">
+                WhatsApp
+              </FieldLabel>
               <Input
                 id="phone"
                 type="tel"
@@ -182,13 +198,16 @@ export function LeadCaptureForm() {
                 inputMode="tel"
                 placeholder="(99) 99999-9999"
                 maxLength={15}
+                className="h-10 px-2.5 text-sm sm:h-11 sm:px-3"
                 value={field.value || ""}
                 onBlur={field.onBlur}
                 onChange={(event) => field.onChange(maskPhone(event.target.value))}
                 aria-invalid={Boolean(errors.phone)}
               />
               {errors.phone ? (
-                <FieldError>{errors.phone.message}</FieldError>
+                <FieldError className="text-[11px] leading-4 sm:text-sm">
+                  {errors.phone.message}
+                </FieldError>
               ) : null}
             </Field>
           )}
@@ -198,14 +217,17 @@ export function LeadCaptureForm() {
           control={control}
           name="modality"
           render={({ field }) => (
-            <Field data-invalid={Boolean(errors.modality)}>
-              <FieldLabel htmlFor="modality">Modalidade do crédito</FieldLabel>
+            <Field data-invalid={Boolean(errors.modality)} className="gap-1.5">
+              <FieldLabel htmlFor="modality" className="text-[11px] sm:text-sm">
+                Modalidade
+              </FieldLabel>
               <Select onValueChange={field.onChange} value={field.value}>
                 <SelectTrigger
                   id="modality"
+                  className="h-10 px-2.5 text-sm sm:h-11 sm:px-3"
                   aria-invalid={Boolean(errors.modality)}
                 >
-                  <SelectValue placeholder="Selecione uma modalidade" />
+                  <SelectValue placeholder="Selecione" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
@@ -218,7 +240,9 @@ export function LeadCaptureForm() {
                 </SelectContent>
               </Select>
               {errors.modality ? (
-                <FieldError>{errors.modality.message}</FieldError>
+                <FieldError className="text-[11px] leading-4 sm:text-sm">
+                  {errors.modality.message}
+                </FieldError>
               ) : null}
             </Field>
           )}
@@ -228,21 +252,24 @@ export function LeadCaptureForm() {
           control={control}
           name="creditValue"
           render={({ field }) => (
-            <Field data-invalid={Boolean(errors.creditValue)}>
-              <FieldLabel htmlFor="creditValue">Valor do crédito</FieldLabel>
+            <Field data-invalid={Boolean(errors.creditValue)} className="gap-1.5">
+              <FieldLabel htmlFor="creditValue" className="text-[11px] sm:text-sm">
+                Valor do crédito
+              </FieldLabel>
               <Input
                 id="creditValue"
                 inputMode="numeric"
-                placeholder="Ex: R$ 80.000"
+                placeholder="R$ 80.000"
+                className="h-10 px-2.5 text-sm sm:h-11 sm:px-3"
                 value={field.value || ""}
                 onBlur={field.onBlur}
-                onChange={(event) =>
-                  field.onChange(maskCurrency(event.target.value))
-                }
+                onChange={(event) => field.onChange(maskCurrency(event.target.value))}
                 aria-invalid={Boolean(errors.creditValue)}
               />
               {errors.creditValue ? (
-                <FieldError>{errors.creditValue.message}</FieldError>
+                <FieldError className="text-[11px] leading-4 sm:text-sm">
+                  {errors.creditValue.message}
+                </FieldError>
               ) : null}
             </Field>
           )}
@@ -252,43 +279,56 @@ export function LeadCaptureForm() {
           control={control}
           name="installment"
           render={({ field }) => (
-            <Field data-invalid={Boolean(errors.installment)}>
-              <FieldLabel htmlFor="installment">Parcela ideal</FieldLabel>
+            <Field data-invalid={Boolean(errors.installment)} className="gap-1.5">
+              <FieldLabel htmlFor="installment" className="text-[11px] sm:text-sm">
+                Parcela ideal
+              </FieldLabel>
               <Input
                 id="installment"
                 inputMode="numeric"
-                placeholder="Ex: R$ 1.200"
+                placeholder="R$ 1.200"
+                className="h-10 px-2.5 text-sm sm:h-11 sm:px-3"
                 value={field.value || ""}
                 onBlur={field.onBlur}
-                onChange={(event) =>
-                  field.onChange(maskCurrency(event.target.value))
-                }
+                onChange={(event) => field.onChange(maskCurrency(event.target.value))}
                 aria-invalid={Boolean(errors.installment)}
               />
               {errors.installment ? (
-                <FieldError>{errors.installment.message}</FieldError>
+                <FieldError className="text-[11px] leading-4 sm:text-sm">
+                  {errors.installment.message}
+                </FieldError>
               ) : null}
             </Field>
           )}
         />
 
-        <Field data-invalid={Boolean(errors.city)} className="md:col-span-2">
-          <FieldLabel htmlFor="city">Cidade/Estado</FieldLabel>
+        <Field
+          data-invalid={Boolean(errors.city)}
+          className="col-span-2 gap-1.5"
+        >
+          <FieldLabel htmlFor="city" className="text-[11px] sm:text-sm">
+            Cidade/Estado
+          </FieldLabel>
           <Input
             id="city"
             autoComplete="address-level2"
             placeholder="Ex: Rio Grande / RS"
+            className="h-10 px-2.5 text-sm sm:h-11 sm:px-3"
             aria-invalid={Boolean(errors.city)}
             {...register("city")}
           />
-          {errors.city ? <FieldError>{errors.city.message}</FieldError> : null}
+          {errors.city ? (
+            <FieldError className="text-[11px] leading-4 sm:text-sm">
+              {errors.city.message}
+            </FieldError>
+          ) : null}
         </Field>
 
         <Button
           type="submit"
           size="lg"
           disabled={isSubmitting}
-          className="mt-1 w-full md:col-span-2"
+          className="col-span-2 mt-1 h-10 w-full text-sm sm:h-12 sm:text-base"
         >
           {isSubmitting ? (
             <Loader2Icon data-icon="inline-start" className="animate-spin" />

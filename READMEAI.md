@@ -11,7 +11,7 @@
 - Área administrativa `/admin` e todo o bloco de CRM interno removidos.
 - O Apps Script agora recebe o lead, grava na planilha e envia o e-mail para `NOTIFICATION_EMAIL`.
 - As CTAs públicas de WhatsApp agora escolhem entre `web.whatsapp.com/send` no desktop e `wa.me` no mobile.
-- A aba do navegador usa a marca da WS como ícone, e a home ganhou um botão flutuante de WhatsApp fixo no canto inferior direito.
+- A aba do navegador usa a marca da WS como ícone e o título simples `WS Inovações`; a home também tem um botão flutuante de WhatsApp fixo no canto inferior direito.
 - O hero deixou de falar só de carro e agora apresenta a WS com uma proposta mais ampla, cobrindo veículo, imóvel e investimento.
 - A seção "Sobre" agora usa `foto3.jpeg` em uma estrutura própria de duas colunas, com CSS dedicado para manter a imagem inteira visível.
 - O lockup textual da marca foi simplificado: navbar e rodapé mostram só `WS Inovações`, sem o subtítulo `Consultoria em Crédito`.
@@ -20,6 +20,29 @@
 - Na seção "Sobre", a composição foi simplificada para um modelo mais previsível: foto em uma coluna, texto em outra e empilhamento no mobile.
 - O carregamento da home ficou mais resiliente em mobile e em links com âncora: o hero não depende mais de esconder no primeiro paint e as seções animadas evitam ficar invisíveis quando já entram no viewport.
 - A seção do Instagram agora usa embed nativo oficial com três posts fixos, carregando `https://www.instagram.com/embed.js` uma única vez e priorizando responsividade em `1 / 2 / 3` colunas conforme a largura.
+- A home agora usa offset explícito para âncoras com menu fixo: `scroll-margin-top` global e correção client-side no hash para parar o scroll no título da seção após a hidratação.
+- A landing entrou em um modo mobile-first mais estrito: navbar mobile reduzida, compactação específica por seção e tentativa de encaixe visual em uma tela útil também para prova social, comparativo, CTA final e footer.
+- No mobile, o formulário agora usa um grid denso de 2 colunas para caber melhor sem mudar payload, regras de validação nem integrações.
+- O FAQ agora tem dois comportamentos: accordion em desktop/tablet e grade compacta com resposta em `Sheet` no mobile.
+- O Instagram agora tem dois layouts: grid com embeds no desktop e carrossel nativo com um post por vez no mobile, com escala leve para conter a altura.
+- A prova social (`+500`, `R$ 20M+`, `4 anos`) faz parte de `#inicio`, mas fica em uma faixa azul própria logo abaixo do painel com imagem/copy do hero.
+- A seção "Sobre" agora usa o título institucional centralizado acima do bloco de imagem + texto para reduzir espaço em branco e melhorar a leitura em telas grandes.
+- O carrossel mobile do Instagram ganhou CTA por dots + setas para avançar e voltar posts.
+- No desktop, as seções voltaram ao fluxo contínuo em altura natural; o `ViewportSectionBody` só aplica estado `fit` no mobile e apenas quando `mode="always"`.
+- A primeira seção foi compactada no desktop por conteúdo, não por `100vh`, para revelar o começo da próxima seção e evitar espaços vazios.
+- No mobile, a seção "Sobre" agora empilha em ordem de leitura: título, texto, tópicos com ícones e foto do Diretor Comercial.
+- A prova social passou a renderizar os números finais imediatamente, sem depender de contador/IntersectionObserver, porque ela faz parte da primeira dobra e não pode aparecer vazia no primeiro paint.
+- A seção `#contato` ganhou um plano azul atrás do formulário, mantendo o formulário branco por cima para preservar contraste e conversão.
+- As seções animadas deixaram de usar `overflow-x-hidden` e passaram para `overflow-x-clip` com layout interno em `overflow: visible`, removendo a possibilidade de scroll vertical isolado dentro de seções.
+- No mobile, a seção "Sobre" usa agora a foto do Diretor Comercial em recorte quadrado maior, com `object-fit: cover` e foco na faixa de rosto + nome da arte.
+- O botão flutuante de WhatsApp fica oculto durante o `#inicio` e aparece após a primeira seção, evitando cobrir a prova social mobile.
+- O `#inicio` voltou a ter presença de primeira dobra no desktop: hero + prova social agora ocupam cerca de 92% a 100% da viewport em telas médias/grandes, mantendo o mobile como estava.
+- A seção "Simulador" passou a ter cabeçalho acima do simulador também no desktop, em vez de título lateral.
+- A foto da seção "Sobre" agora usa o mesmo recorte quadrado no desktop e no mobile, priorizando rosto e nome da arte `foto3.jpeg`.
+- A navegação por âncora agora escolhe o primeiro `h2` realmente visível dentro da seção; isso corrige o FAQ desktop, que tinha um título mobile escondido antes do título desktop.
+- A navegação por âncora ganhou respiro responsivo abaixo da navbar e, no mobile, passou a medir somente a barra fixa do topo, não o painel aberto do menu.
+- O footer saiu do `ViewportSectionBody` e passou a ter layout próprio, removendo a área branca extra que aparecia depois do rodapé.
+- O CTA final também saiu do `ViewportSectionBody`, ficou mais compacto, ganhou fundo escuro na seção e teve a copy ampliada de "carro" para "próxima conquista".
 - `npm run lint` e `npm run build` passaram após a remoção do CRM, a simplificação do fluxo e os ajustes visuais recentes.
 
 ## [LOG DE ALTERAÇÕES]
@@ -35,6 +58,7 @@
 - `src/components/landing/smart-whatsapp-link.tsx`: novo componente client para decidir o melhor link de WhatsApp conforme o dispositivo.
 - `src/app/page.tsx`, `src/components/landing/site-navbar.tsx`, `src/components/landing/final-cta-banner.tsx` e `src/components/landing/site-footer.tsx`: CTAs migradas para o link inteligente de WhatsApp.
 - `src/app/layout.tsx`: metadata atualizada para usar `logo-symbol.png` como ícone da aba.
+- `src/app/layout.tsx`: título da aba simplificado para apenas `WS Inovações`.
 - `src/components/landing/floating-whatsapp-button.tsx`: novo botão flutuante responsivo de WhatsApp com ícone próprio.
 - `src/app/favicon.ico`: removido para não conflitar com o novo ícone da marca.
 - `src/app/page.tsx`: hero atualizado para manter o posicionamento mais amplo da marca e passar `foto3.jpeg` para a seção institucional.
@@ -48,7 +72,43 @@
 - `src/components/landing/animated-section.tsx`: animação reestruturada para preservar conteúdo visível quando a seção já entra em viewport no carregamento ou por hash.
 - `src/components/landing/instagram-feed-section.tsx`: seção do Instagram reescrita para usar embed nativo oficial com os três links fixos e layout extremamente responsivo.
 - `src/components/landing/instagram-feed-server-section.tsx`: simplificado para apenas renderizar a seção client de embed, sem fetch do feed antigo.
+- `src/components/landing/viewport-section-body.tsx`: novo wrapper client que mede o conteúdo com `ResizeObserver` e alterna entre `fit` e `natural` por seção.
+- `src/app/page.tsx`: seções com âncora passaram a usar o wrapper de viewport-fit e ficaram mais compactas para aumentar a chance de caber na viewport útil.
+- `src/app/globals.css`: adicionadas variáveis de altura da navbar, `scroll-padding-top`, altura útil de viewport e classes-base do sistema de viewport-fit.
+- `src/components/ui/sheet.tsx`: novo componente shadcn para suportar a resposta do FAQ em overlay mobile.
+- `package.json` / `package-lock.json`: adicionada a dependência `@radix-ui/react-dialog`.
+- `src/components/landing/site-navbar.tsx`: navbar mobile encurtada para ampliar viewport útil e melhorar o one-screen no celular.
+- `src/components/landing/lead-capture-form.tsx`: formulário refeito em grid 2x2 no mobile, com labels/inputs menores e CTA mais compacta.
 - `src/components/landing/lead-capture-form.tsx`, `social-proof-bar.tsx`, `services-grid.tsx`, `comparison-section.tsx`, `how-it-works-timeline.tsx`, `faq-section.tsx`, `final-cta-banner.tsx`, `floating-whatsapp-button.tsx` e `site-footer.tsx`: refinados para densidade, toque e leitura melhores no mobile.
+- `src/components/landing/instagram-feed-section.tsx`: mobile trocado para carrossel swipe com um embed por vez; desktop manteve grid.
+- `src/app/page.tsx`: barra de prova social mantida dentro de `#inicio`, mas em uma `div` azul separada abaixo do painel com imagem do hero.
+- `src/app/page.tsx`: hero recalculado com `--inicio-proof-height`, tamanhos de headline revisados no desktop, `sizes` da imagem principal ajustado e formulário envolvido por um plano azul na seção de contato.
+- `src/components/landing/social-proof-bar.tsx`: removida a animação de contagem dependente de viewport; a barra ficou mais compacta e com números visíveis de imediato.
+- `README.md` e `READMEAI.md`: documentação atualizada com os ajustes de primeira dobra e fundo azul do formulário.
+- `src/components/landing/viewport-section-body.tsx`: o modo `fit` deixou de atuar no desktop e em seções `auto`, preservando altura natural para o layout contínuo.
+- `src/components/landing/site-navbar.tsx`: adicionada correção client-side de navegação por hash para calcular a altura real da navbar e alinhar o título da seção.
+- `src/app/globals.css`: âncoras com `scroll-margin-top` baseado em `--site-navbar-offset`; CSS mobile da seção "Sobre" reordenado e compactado.
+- `src/components/landing/about-section.tsx`: `sizes` da foto ajustado para o novo tamanho mobile da imagem.
+- `src/components/landing/about-section.tsx` e `src/app/globals.css`: título da seção "Sobre" reposicionado acima do bloco institucional, centralizado e com tipografia ampliada.
+- `src/components/landing/instagram-feed-section.tsx`: adicionadas setas de avanço e retorno no carrossel mobile dos posts.
+- `src/components/landing/animated-section.tsx`: trocado `overflow-x-hidden` por `overflow-x-clip` para evitar que o eixo vertical vire área rolável de seção.
+- `src/app/globals.css`: `body` e wrappers de viewport ajustados para clipping horizontal sem scroll interno; foto mobile da seção "Sobre" passou a ser quadrada e maior.
+- `src/app/page.tsx`: hero desktop voltou a ter mais presença visual, com headline e faixa de prova social menos comprimidas, mantendo altura natural no desktop.
+- `src/components/landing/social-proof-bar.tsx`: espaçamento desktop da faixa de prova social restaurado para ficar menos espremido.
+- `src/components/landing/floating-whatsapp-button.tsx`: botão flutuante agora aparece depois da primeira seção para não sobrepor os números da prova social.
+- `src/components/landing/about-section.tsx`: `sizes` da imagem atualizado para o novo tamanho do recorte mobile.
+- `README.md` e `READMEAI.md`: documentação atualizada com a remoção do scroll isolado e o novo comportamento mobile.
+- `src/app/page.tsx`: primeira seção desktop ampliada para ocupar aproximadamente uma dobra completa com a prova social; seção `#simulador` reorganizada em cabeçalho acima + simulador abaixo.
+- `src/app/globals.css`: foto da seção "Sobre" no desktop também passou a usar recorte quadrado com `object-fit: cover` e foco em rosto/nome.
+- `src/components/landing/about-section.tsx`: `sizes` da foto atualizado para refletir o quadrado desktop maior.
+- `README.md` e `READMEAI.md`: documentação atualizada com a exceção do `#inicio` em desktop e o novo layout do simulador.
+- `src/components/landing/site-navbar.tsx`: navegação por hash refeita para rolar até o título visível da seção, tratar cliques repetidos na mesma âncora e suportar `popstate`.
+- `src/components/landing/site-navbar.tsx`: cálculo de offset ajustado para medir a barra fixa interna da navbar, evitando que o menu mobile aberto empurre o alvo para o centro da tela.
+- `src/app/globals.css`: adicionado `--site-anchor-gap` responsivo e `--site-anchor-offset` para unificar `scroll-padding-top` e `scroll-margin-top`.
+- `src/components/landing/site-footer.tsx`: removido o wrapper de viewport do rodapé, layout reorganizado em grid próprio e copyright atualizado para 2026.
+- `src/app/page.tsx`: última seção passou a usar fundo `brand-dark` e renderizar o CTA final sem `ViewportSectionBody`, removendo o bloco branco antes do footer.
+- `src/components/landing/final-cta-banner.tsx`: CTA final compactado e copy atualizada para uma promessa mais ampla que veículo.
+- `README.md` e `READMEAI.md`: documentação atualizada com a correção do FAQ desktop e a remoção do espaço branco após o footer.
 - `src/proxy.ts`: removido.
 - `src/lib/admin-data.ts`: removido.
 - `src/app/admin/*`: removido.
@@ -68,10 +128,29 @@
 - A seção "Sobre" deixou de depender de composições experimentais em Tailwind puro; a versão atual usa classes semânticas em CSS para facilitar futuros ajustes finos.
 - `whileInView` puro com estado inicial escondido pode gerar páginas aparentemente vazias em capturas/headless e em alguns cenários de âncora. A solução atual usa controles do Motion para esconder só o que realmente começa fora do viewport.
 - O embed nativo do Instagram voltou a ser a estratégia ativa. O render final continua dependendo de os posts estarem públicos, de o script externo carregar e de o navegador não bloquear conteúdo de terceiros.
+- O requisito de “uma seção por tela” não é forçado cegamente: FAQ expandida, formulário longo e embeds podem cair para altura natural quando a viewport útil não comporta o conteúdo com qualidade.
+- A diretriz geral do desktop continua sendo layout contínuo por conteúdo; a exceção atual é o `#inicio`, que pode ocupar 90% a 100% da viewport por pedido explícito para fortalecer a primeira dobra.
+- O requisito de uma tela por seção no mobile exigiu mudar interação em vez de só apertar layout: FAQ foi para `Sheet` e Instagram para carrossel local.
+- O embed oficial do Instagram continua variável. A solução atual no mobile combina um post por vez + escala leve; qualquer troca futura nessa seção deve considerar esse limite antes de tentar novos encaixes.
+- Como a prova social agora pertence a `#inicio`, qualquer ajuste futuro da seção inicial precisa preservar a faixa azul abaixo do painel principal, sem voltar a transformá-la em seção isolada.
+- O grid denso do formulário melhora muito a altura no mobile, mas aumenta a sensibilidade a placeholders longos e mensagens de erro grandes.
+- A validação visual com Chrome headless precisou rodar fora do sandbox; screenshots com `#contato` ficaram deslocadas por causa da âncora, então a validação mais confiável desta rodada foi na primeira dobra desktop/mobile e no topo do painel azul do formulário.
+- Screenshots diretas com URL contendo hash continuaram pouco confiáveis no Chrome headless, mas a medição via DevTools Protocol confirmou: em `#sobre` mobile o header termina em `56px` e o título começa em `56px`; em desktop o header termina em `80px` e o título começa em `80px`.
+- A seção "Sobre" mobile medida em `390x844` ficou com cerca de `421px` de altura visível a partir do título, deixando a próxima seção aparecer logo abaixo.
+- `overflow-x-hidden` em seções pode gerar comportamento ruim de rolagem isolada por interação entre eixos de overflow. A correção atual usa `overflow-x-clip` e mantém `overflow-y` visível nas seções principais.
+- A captura direta `http://localhost:3002/#sobre` ainda pode sair branca no Chrome headless; para validar âncoras, usar DevTools Protocol carregando `/`, rolando para o alvo e então capturando. Foi assim que a rodada atual validou `#sobre`.
+- O bug do FAQ desktop vinha de `target.querySelector("h2")` encontrar primeiro o título mobile escondido (`display: none`), com `getBoundingClientRect().top` igual a `0`; a correção deve sempre filtrar por heading visível.
+- O bug do menu mobile vinha de medir `header.offsetHeight` enquanto o dropdown ainda estava aberto/animando; isso incluía a altura do painel do menu no offset e fazia a seção parar no meio da tela. A correção mede `header > div` via `navbarBarRef` e soma apenas o gap de âncora.
+- A tentativa de medir cliques por DevTools Protocol no Chrome headless foi bloqueada pelo Windows com `Acesso negado`; screenshots diretas com hash continuaram brancas, como já observado em rodadas anteriores. Para validação automatizada fina, preferir abrir `/` e acionar o clique em navegador real/DevTools.
+- `npm run build` falhou temporariamente com `EBUSY` porque perfis de Chrome headless criados dentro de `.next` mantiveram arquivos `CrashpadMetrics-active.pma` travados. O contorno foi encerrar apenas os processos `chrome.exe` cujo `CommandLine` apontava para esses perfis temporários e repetir o build.
+- Não usar `ViewportSectionBody` no footer: a medição absoluta de viewport pode aumentar o scroll final da página e criar uma área branca depois do rodapé.
+- Não usar `ViewportSectionBody` no CTA final quando ele estiver colado ao footer; o wrapper adiciona padding de seção e pode criar uma faixa clara desnecessária no fim.
+- Já havia um `next dev` ativo em `http://localhost:3002`; novas tentativas em portas 3001/3003 não foram necessárias para validar esta rodada.
 
 ## [PRÓXIMOS PASSOS]
 
-- Validar visualmente a ordem da seção "Sobre" no mobile, caso o cliente queira texto antes da foto em vez de foto antes do texto.
+- Validar em navegador real os cliques do menu em `#contato`, `#sobre`, `#servicos`, `#como-funciona`, `#simulador` e `#faq`, conferindo se cada título encosta logo abaixo da navbar.
+- Validar especialmente o clique em FAQ no desktop depois de deploy, porque a seção mantém dois títulos responsivos e a navegação depende do título visível.
 - Validar se os badges da seção "Sobre" não ficam longos demais nas menores larguras; se necessário, encurtar copy ou reduzir ainda mais a densidade.
 - Revisar a copy do hero com foco mobile; hoje a hierarquia está melhor, mas uma versão ligeiramente mais curta pode render ainda mais na primeira dobra.
 - Fazer um lead de teste real e validar:
@@ -81,7 +160,19 @@
 - Validar o comportamento do link de WhatsApp em desktop e mobile real depois do deploy.
 - Validar visualmente o botão flutuante de WhatsApp em mobile e desktop para confirmar que ele não cobre CTA importante nem campo do formulário.
 - Validar os três embeds do Instagram em mobile real e em produção/Vercel, especialmente para confirmar largura, altura e tempo de carregamento.
-- Se a próxima rodada for de acabamento visual, continuar a otimização mobile começando por hero, formulário, comparação e FAQ.
+- Validar as seções com âncora em viewports baixas (`320x568`, `360x640`, `768x1024`, `1366x768`) com foco em offset do menu fixo e densidade de leitura.
+- Validar em aparelho real ou DevTools responsivo o comportamento completo do mobile em `360x640`, `320x568` e `390x844`, com foco em hero, Sobre, contato, FAQ, Instagram e footer.
+- Validar se a prova social na faixa azul abaixo do hero continua confortável em telas muito baixas, especialmente `320x568`.
+- Validar o `#inicio` em desktop real (`1366x768`, `1440x900` e telas maiores) para confirmar que hero + prova social ficam entre 90% e 100% da tela sem parecerem vazios.
+- Validar a seção `#simulador` em desktop para confirmar que o título acima melhora leitura e não cria excesso de respiro.
+- Validar em celular real se o recorte quadrado da foto da seção "Sobre" continua mostrando rosto e nome com boa nitidez em telas menores que `390px`.
+- Validar o recorte quadrado desktop da foto da seção "Sobre" em notebook e monitor maior, conferindo se rosto e nome continuam visíveis.
+- Validar no navegador real se o botão flutuante de WhatsApp aparece suavemente após a primeira seção e não cobre CTAs ou cards importantes nas seções seguintes.
+- Validar manualmente no navegador real a seção `#contato` inteira, especialmente a sombra e o respiro do plano azul atrás do formulário em desktop.
+- Validar manualmente cliques do menu mobile aberto para `#sobre`, `#contato`, `#servicos`, `#como-funciona`, `#simulador` e `#faq`, confirmando que cada título fica abaixo da navbar com respiro e não centralizado.
+- Validar o fim da página em desktop e mobile para confirmar que não voltou a aparecer área branca depois do footer.
+- Validar se o CTA final compacto ainda tem destaque suficiente antes do footer em desktop e mobile.
+- Se a próxima rodada for de acabamento visual, continuar a otimização mobile começando por comparação, Instagram e footer, porque são as seções mais apertadas do novo one-screen.
 - Se futuramente for criado um CRM com Supabase, começar reaproveitando o schema atual de lead em `src/lib/leads.ts`.
 
 ## [NOTAS DE ARQUITETURA]
@@ -100,9 +191,23 @@
   - gravação em planilha
   - envio de e-mail
 - A decisão do link de WhatsApp foi isolada em `src/components/landing/smart-whatsapp-link.tsx`; mudanças futuras nesse comportamento devem começar ali.
-- O favicon da aplicação agora vem do `logo-symbol.png` via metadata em `src/app/layout.tsx`, sem depender de `favicon.ico`.
+- O título e o favicon da aplicação são definidos via metadata em `src/app/layout.tsx`; o título deve permanecer simples como `WS Inovações`, e o favicon vem de `logo-symbol.png` sem depender de `favicon.ico`.
 - O hero principal vive em `src/app/page.tsx`; ajustes de posicionamento de marca e promessa comercial devem começar ali.
+- A prova social da home agora vive dentro de `#inicio` em `src/app/page.tsx`, em faixa azul separada abaixo do painel visual do hero, não como `AnimatedSection` própria.
+- O `#inicio` usa `--inicio-proof-height`; no desktop, ele é a exceção de composição e pode ocupar perto de uma viewport inteira, enquanto as demais seções continuam em altura natural.
+- `SocialProofBar` deve permanecer visível no primeiro paint enquanto fizer parte da primeira dobra; evitar voltar para estado inicial oculto ou contagem que comece em zero.
 - A seção institucional agora usa proporções e `object-position` por breakpoint para segurar melhor fotos verticais sem criar barras de fundo visíveis.
+- A foto institucional de `foto3.jpeg` prioriza impacto visual em recorte quadrado (`object-fit: cover`) no mobile e no desktop, porque a arte original concentra rosto e nome na metade superior.
+- Seções principais não devem usar `overflow-y: auto`, `overflow-y: scroll` ou `overflow-x-hidden`; o fluxo esperado é uma única rolagem da página, com clipping horizontal via `overflow-x-clip`.
+- O botão flutuante de WhatsApp deve permanecer fora da primeira dobra enquanto a prova social fizer parte do `#inicio`; o hero já contém CTA explícita para WhatsApp.
 - A seção de Instagram vive em `src/components/landing/instagram-feed-section.tsx`, com um wrapper fino em `src/components/landing/instagram-feed-server-section.tsx` só para manter a composição da home intacta.
+- O sistema de viewport-fit fica em `src/components/landing/viewport-section-body.tsx`, mas `fit` só deve atuar em mobile e com `mode="always"`; seções desktop e seções `auto` devem permanecer em altura natural.
+- `ViewportSectionBody` ainda aceita `mobileFit="strict"`, mas não deve ser usado para recriar uma seção desktop com altura forçada.
+- O footer não deve usar `ViewportSectionBody`; ele precisa terminar o documento sem elementos de medição que vazem para além do rodapé.
+- O CTA final deve permanecer compacto e em fundo escuro quando estiver imediatamente antes do footer, evitando uma seção branca solta no fechamento da página.
 - O comportamento de entrada das seções está centralizado em `src/components/landing/animated-section.tsx`; qualquer ajuste entre performance, visibilidade inicial e motion deve começar por esse arquivo.
+- A navegação por hash está centralizada em `src/components/landing/site-navbar.tsx`; o offset deve continuar medindo a barra fixa interna (`navbarBarRef`) e somando `--site-anchor-gap`, nunca o `header` inteiro quando o menu mobile estiver aberto.
+- O CSS de âncoras vive em `src/app/globals.css` com `--site-anchor-gap` e `--site-anchor-offset`; manter `scroll-padding-top` e `scroll-margin-top` sincronizados para cliques nativos e scroll client-side terem o mesmo respiro.
+- O FAQ mobile vive no mesmo arquivo da versão desktop (`src/components/landing/faq-section.tsx`), mas usa layout separado + `Sheet`. Não tentar reaproveitar o accordion inline no celular se a meta continuar sendo uma tela por seção.
+- O Instagram mobile também vive no mesmo componente da versão desktop (`src/components/landing/instagram-feed-section.tsx`), mas com um trilho local `snap-x` e controle por dots; não adicionar biblioteca de carrossel sem necessidade real.
 - Se o projeto ganhar Supabase depois, a recomendação é não misturar novamente CRM + Apps Script + outro CRM externo. Escolher uma fonte principal de gestão e manter o restante como canais de notificação.

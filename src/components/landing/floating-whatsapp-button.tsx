@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import { cn } from "@/lib/utils";
 
 import { SmartWhatsAppLink } from "@/components/landing/smart-whatsapp-link";
@@ -35,13 +37,44 @@ export function FloatingWhatsAppButton({
   message,
   className,
 }: FloatingWhatsAppButtonProps) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const updateVisibility = () => {
+      const hero = document.getElementById("inicio");
+
+      if (!hero) {
+        setIsVisible(window.scrollY > 240);
+        return;
+      }
+
+      const heroBottom = hero.getBoundingClientRect().bottom;
+      setIsVisible(heroBottom < window.innerHeight - 72);
+    };
+
+    updateVisibility();
+
+    window.addEventListener("scroll", updateVisibility, { passive: true });
+    window.addEventListener("resize", updateVisibility);
+    window.visualViewport?.addEventListener("resize", updateVisibility);
+
+    return () => {
+      window.removeEventListener("scroll", updateVisibility);
+      window.removeEventListener("resize", updateVisibility);
+      window.visualViewport?.removeEventListener("resize", updateVisibility);
+    };
+  }, []);
+
   return (
     <SmartWhatsAppLink
       phone={phone}
       message={message}
       aria-label="Chamar no WhatsApp"
       className={cn(
-        "fixed z-40 flex size-[3.25rem] items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_18px_40px_rgba(37,211,102,0.38)] ring-4 ring-white/90 transition-transform duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white [bottom:max(0.85rem,env(safe-area-inset-bottom))] [right:max(0.85rem,env(safe-area-inset-right))] sm:size-16 sm:[bottom:max(1rem,env(safe-area-inset-bottom))] sm:[right:max(1rem,env(safe-area-inset-right))] lg:size-[4.5rem] lg:[bottom:max(1.5rem,env(safe-area-inset-bottom))] lg:[right:max(1.5rem,env(safe-area-inset-right))]",
+        "fixed z-40 flex size-[3rem] items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_18px_40px_rgba(37,211,102,0.38)] ring-4 ring-white/90 transition-all duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white [bottom:max(0.75rem,env(safe-area-inset-bottom))] [right:max(0.75rem,env(safe-area-inset-right))] sm:size-16 sm:[bottom:max(1rem,env(safe-area-inset-bottom))] sm:[right:max(1rem,env(safe-area-inset-right))] lg:size-[4.5rem] lg:[bottom:max(1.5rem,env(safe-area-inset-bottom))] lg:[right:max(1.5rem,env(safe-area-inset-right))]",
+        isVisible
+          ? "translate-y-0 opacity-100"
+          : "pointer-events-none translate-y-3 opacity-0",
         className,
       )}
     >

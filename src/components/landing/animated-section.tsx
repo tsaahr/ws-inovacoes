@@ -22,6 +22,19 @@ function isElementInitiallyVisible(element: HTMLElement) {
   return rect.top < viewportHeight * 0.92 && rect.bottom > viewportHeight * 0.08;
 }
 
+function isHashTarget(element: HTMLElement) {
+  const hash = window.location.hash.slice(1);
+
+  if (!hash) {
+    return false;
+  }
+
+  const decodedHash = decodeURIComponent(hash);
+  const target = document.getElementById(decodedHash);
+
+  return element.id === decodedHash || Boolean(target && element.contains(target));
+}
+
 export function AnimatedSection({
   direction,
   disableInitialHide = false,
@@ -39,7 +52,7 @@ export function AnimatedSection({
       return undefined;
     }
 
-    if (disableInitialHide || isElementInitiallyVisible(node)) {
+    if (disableInitialHide || isHashTarget(node) || isElementInitiallyVisible(node)) {
       controls.set({ opacity: 1, x: 0 });
       return undefined;
     }
@@ -70,7 +83,7 @@ export function AnimatedSection({
       ref={sectionRef}
       initial={false}
       animate={controls}
-      className={cn("overflow-hidden", className)}
+      className={cn("overflow-x-clip", className)}
       {...props}
     >
       {children}
