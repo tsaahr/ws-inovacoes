@@ -29,10 +29,10 @@ export function AboutSection({ image }: AboutSectionProps) {
 
         <div className="coluna-texto">
           <p className="paragrafo-sobre">
-            Somos uma empresa especializada em consórcios, oferecendo as melhores
-            soluções para a realização dos seus sonhos com ética, transparência e
-            credibilidade. Comercializamos consórcios de Imóvel, Veículos,
-            máquinas agrícolas e serviços.
+            Consórcios que realizam sonhos. Com 4 anos de experiência, somos
+            especialistas em ajudar brasileiros a conseguir imóvel, veículos e
+            máquinas agrícolas sem juros. Parcerias com as maiores administradoras
+            do Brasil, atendimento personalizado e transparência em cada etapa.
           </p>
 
           <div className="badges-group">

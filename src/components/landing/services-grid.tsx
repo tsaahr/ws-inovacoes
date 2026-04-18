@@ -17,25 +17,25 @@ const services = [
     icon: House,
     title: "Imóveis",
     description:
-      "Conquiste sua casa própria, invista ou reforme sem pagar juros abusivos.",
+      "Casa própria sem juros. Compre, construa ou reforme com parcelas justas. Entrada baixa, sem surpresas.",
   },
   {
     icon: Truck,
     title: "Veículos leves e pesados",
     description:
-      "Do carro do dia a dia ao caminhão para o seu negócio, de forma econômica e planejada.",
+      "Seu veículo sem juros. Carros, caminhões, ônibus—do trabalho ao lazer. Parcelas previsíveis, sem juros.",
   },
   {
     icon: Tractor,
     title: "Máquinas Agrícolas",
     description:
-      "Renove sua frota de tratores e colheitadeiras sem comprometer o capital de giro.",
+      "Máquinas que fazem render. Atualize sua frota mantendo o caixa saudável. Parcelas que não machucam.",
   },
   {
     icon: Briefcase,
     title: "Serviços",
     description:
-      "Estudos, viagens, cirurgias e reformas com planejamento e sem juros.",
+      "Seus projetos realizados. Educação, saúde, viagens, reformas—tudo sem juros. Parcele seus sonhos.",
   },
 ] as const;
 

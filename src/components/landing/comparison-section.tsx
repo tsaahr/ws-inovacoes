@@ -51,10 +51,11 @@ export function ComparisonSection() {
           Entenda a diferença
         </Badge>
         <h2 className="text-[1.55rem] font-semibold leading-[1.05] text-brand-dark sm:text-4xl md:text-5xl">
-          Consórcio vs Financiamento
+          Por que consórcio custa menos? Veja a diferença prática
         </h2>
         <p className="text-xs leading-[1.375rem] text-muted-foreground sm:text-lg sm:leading-8">
-          Veja na prática por que o consórcio custa muito menos no longo prazo.
+          No mesmo valor de entrada do financiamento, o consórcio oferece zero
+          juros, mais flexibilidade e 95% menos custo total. Veja como:
         </p>
       </div>
 

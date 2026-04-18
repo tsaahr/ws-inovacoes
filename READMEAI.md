@@ -43,6 +43,7 @@
 - A navegação por âncora ganhou respiro responsivo abaixo da navbar e, no mobile, passou a medir somente a barra fixa do topo, não o painel aberto do menu.
 - O footer saiu do `ViewportSectionBody` e passou a ter layout próprio, removendo a área branca extra que aparecia depois do rodapé.
 - O CTA final também saiu do `ViewportSectionBody`, ficou mais compacto, ganhou fundo escuro na seção e teve a copy ampliada de "carro" para "próxima conquista".
+- As principais copies da landing foram trocadas para uma comunicação mais comercial: sonho, consórcio sem juros, simulação em 3 minutos, parcelas baixas, prova social de 500 clientes e comparação mais orientada a custo.
 - `npm run lint` e `npm run build` passaram após a remoção do CRM, a simplificação do fluxo e os ajustes visuais recentes.
 
 ## [LOG DE ALTERAÇÕES]
@@ -109,6 +110,11 @@
 - `src/app/page.tsx`: última seção passou a usar fundo `brand-dark` e renderizar o CTA final sem `ViewportSectionBody`, removendo o bloco branco antes do footer.
 - `src/components/landing/final-cta-banner.tsx`: CTA final compactado e copy atualizada para uma promessa mais ampla que veículo.
 - `README.md` e `READMEAI.md`: documentação atualizada com a correção do FAQ desktop e a remoção do espaço branco após o footer.
+- `src/app/page.tsx`: hero e chamada do formulário atualizados com copy mais direta para conversão.
+- `src/components/landing/about-section.tsx`: texto institucional atualizado para destacar 4 anos de experiência, especialização e parcerias com administradoras.
+- `src/components/landing/services-grid.tsx`: descrições de imóveis, veículos, máquinas agrícolas e serviços atualizadas.
+- `src/components/landing/comparison-section.tsx`: título e introdução do comparativo atualizados para enfatizar economia e diferença prática.
+- `README.md` e `READMEAI.md`: documentação atualizada com a rodada de copy comercial.
 - `src/proxy.ts`: removido.
 - `src/lib/admin-data.ts`: removido.
 - `src/app/admin/*`: removido.
@@ -146,6 +152,7 @@
 - Não usar `ViewportSectionBody` no footer: a medição absoluta de viewport pode aumentar o scroll final da página e criar uma área branca depois do rodapé.
 - Não usar `ViewportSectionBody` no CTA final quando ele estiver colado ao footer; o wrapper adiciona padding de seção e pode criar uma faixa clara desnecessária no fim.
 - Já havia um `next dev` ativo em `http://localhost:3002`; novas tentativas em portas 3001/3003 não foram necessárias para validar esta rodada.
+- As novas claims comerciais usam expressões fortes como `sem juros`, `zero burocracias` e `95% menos custo total`; manter essas frases somente se estiverem alinhadas com a política comercial, taxas administrativas e materiais aprovados pela operação.
 
 ## [PRÓXIMOS PASSOS]
 
@@ -172,6 +179,8 @@
 - Validar manualmente cliques do menu mobile aberto para `#sobre`, `#contato`, `#servicos`, `#como-funciona`, `#simulador` e `#faq`, confirmando que cada título fica abaixo da navbar com respiro e não centralizado.
 - Validar o fim da página em desktop e mobile para confirmar que não voltou a aparecer área branca depois do footer.
 - Validar se o CTA final compacto ainda tem destaque suficiente antes do footer em desktop e mobile.
+- Validar em navegador real se as novas copies longas dos cards de serviços continuam confortáveis no mobile, principalmente em `320x568` e `360x640`.
+- Validar com o responsável comercial/jurídico as claims `sem juros`, `zero burocracias` e `95% menos custo total` antes de tráfego pago ou campanhas maiores.
 - Se a próxima rodada for de acabamento visual, continuar a otimização mobile começando por comparação, Instagram e footer, porque são as seções mais apertadas do novo one-screen.
 - Se futuramente for criado um CRM com Supabase, começar reaproveitando o schema atual de lead em `src/lib/leads.ts`.
 
@@ -192,6 +201,7 @@
   - envio de e-mail
 - A decisão do link de WhatsApp foi isolada em `src/components/landing/smart-whatsapp-link.tsx`; mudanças futuras nesse comportamento devem começar ali.
 - O título e o favicon da aplicação são definidos via metadata em `src/app/layout.tsx`; o título deve permanecer simples como `WS Inovações`, e o favicon vem de `logo-symbol.png` sem depender de `favicon.ico`.
+- A copy comercial principal está espalhada por `src/app/page.tsx`, `src/components/landing/about-section.tsx`, `src/components/landing/services-grid.tsx` e `src/components/landing/comparison-section.tsx`; futuras revisões de promessa/claims devem começar nesses arquivos.
 - O hero principal vive em `src/app/page.tsx`; ajustes de posicionamento de marca e promessa comercial devem começar ali.
 - A prova social da home agora vive dentro de `#inicio` em `src/app/page.tsx`, em faixa azul separada abaixo do painel visual do hero, não como `AnimatedSection` própria.
 - O `#inicio` usa `--inicio-proof-height`; no desktop, ele é a exceção de composição e pode ocupar perto de uma viewport inteira, enquanto as demais seções continuam em altura natural.

@@ -17,6 +17,8 @@ A marca também passou a ser usada como ícone da aba, o título da guia fica ap
 
 A copy do hero foi ampliada para posicionar a WS Inovações além de carro, incluindo também imóvel e investimento. A seção institucional usa `foto3.jpeg` com enquadramento responsivo mais limpo, o topo e o rodapé mostram só o nome da marca, e o simulador exibe crédito, parcela e modelo sem mostrar prazo em meses.
 
+A copy comercial da home agora é mais direta para conversão, com foco em sonho, consórcio sem juros, simulação em poucos minutos, parcelas acessíveis e prova social de mais de 500 clientes.
+
 Nesta etapa, a landing também recebeu uma rodada mais agressiva de foco mobile: navbar menor, hero mais compacto, prova social integrada ao `#inicio` em uma faixa azul logo abaixo da imagem principal, formulário em grid denso de 2 colunas no celular, seção "Sobre" com título centralizado acima do bloco institucional, foto em recorte quadrado com rosto e nome visíveis no mobile e no desktop, FAQ com lista compacta + resposta em sheet no mobile, Instagram em carrossel com um embed por vez e setas para avançar/voltar posts, além de rodapé reorganizado em bloco curto. O desktop e o tablet foram preservados o máximo possível.
 
 A seção do Instagram voltou a usar embed nativo oficial, agora com três posts fixos e layout mais defensivo para mobile, tablet e desktop.

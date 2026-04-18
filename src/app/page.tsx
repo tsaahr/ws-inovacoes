@@ -69,12 +69,12 @@ export default async function Home() {
                   <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 text-white sm:gap-6 lg:gap-8">
                     <div className="max-w-[16.75rem] sm:max-w-2xl lg:max-w-[38rem] xl:max-w-[41rem]">
                       <h1 className="text-[1.7rem] font-semibold leading-[1.03] text-balance sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-[3.45rem]">
-                        Planejamento e estratégia para sua contemplação acontecer com
-                        mais previsibilidade.
+                        Compre seu sonho com inteligência, sem juros.
                       </h1>
                       <p className="mt-2.5 max-w-[16.75rem] text-xs leading-[1.375rem] text-white/86 sm:mt-5 sm:max-w-xl sm:text-base sm:leading-7 lg:max-w-lg lg:text-lg lg:leading-8">
-                        Análise, acompanhamento e orientação para quem busca crédito de
-                        forma inteligente, seja para veículo, imóvel ou investimento.
+                        Consórcios de imóvel, veículos e investimentos. Parcelas
+                        baixas, zero burocracias. Mais de 500 clientes já realizaram
+                        seus sonhos. Simule agora!
                       </p>
                     </div>
 
@@ -126,11 +126,12 @@ export default async function Home() {
                   Simulação gratuita
                 </p>
                 <h2 className="text-[1.55rem] font-semibold leading-[1.05] text-brand-dark sm:text-3xl md:text-4xl xl:text-5xl">
-                  Informe seu objetivo e receba um caminho viável.
+                  Descubra seu melhor plano em 3 minutos.
                 </h2>
                 <p className="max-w-xl text-xs leading-[1.375rem] text-muted-foreground sm:text-base sm:leading-7 lg:text-lg lg:leading-8">
-                  A primeira conversa organiza valor de crédito, perfil de parcela
-                  e melhor forma de acompanhar seu plano.
+                  Informe o que você quer, imóvel, carro ou máquina, e receba uma
+                  simulação personalizada com parcelas que cabem no seu bolso. Sem
+                  compromisso, sem surpresas.
                 </p>
               </div>
               <div className="relative rounded-lg bg-brand-navy p-2 shadow-[0_22px_60px_rgba(13,31,60,0.22)] ring-1 ring-brand-blue/20 sm:p-3 md:p-4">
