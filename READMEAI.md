@@ -12,10 +12,11 @@
 - O Apps Script agora recebe o lead, grava na planilha e envia o e-mail para `NOTIFICATION_EMAIL`.
 - As CTAs públicas de WhatsApp agora escolhem entre `web.whatsapp.com/send` no desktop e `wa.me` no mobile.
 - A aba do navegador usa a marca da WS como ícone e o título simples `WS Inovações`; a home também tem um botão flutuante de WhatsApp fixo no canto inferior direito.
+- O rodapé lista WhatsApp, Instagram e a página oficial do Facebook.
 - O hero deixou de falar só de carro e agora apresenta a WS com uma proposta mais ampla, cobrindo veículo, imóvel e investimento.
 - A seção "Sobre" agora usa `foto3.jpeg` em uma estrutura própria de duas colunas, com CSS dedicado para manter a imagem inteira visível.
 - O lockup textual da marca foi simplificado: navbar e rodapé mostram só `WS Inovações`, sem o subtítulo `Consultoria em Crédito`.
-- O simulador mantém os valores reais da tabela, mas não exibe mais o prazo em meses.
+- O simulador mantém os valores reais da tabela, mas não exibe mais o prazo em meses nem o modelo interno do plano.
 - A landing passou por uma rodada específica de otimização para celular: hero mais compacto, CTAs com largura total no mobile, navbar mais enxuta, espaçamentos móveis recalibrados e botão flutuante respeitando safe area.
 - Na seção "Sobre", a composição foi simplificada para um modelo mais previsível: foto em uma coluna, texto em outra e empilhamento no mobile.
 - O carregamento da home ficou mais resiliente em mobile e em links com âncora: o hero não depende mais de esconder no primeiro paint e as seções animadas evitam ficar invisíveis quando já entram no viewport.
@@ -44,6 +45,10 @@
 - O footer saiu do `ViewportSectionBody` e passou a ter layout próprio, removendo a área branca extra que aparecia depois do rodapé.
 - O CTA final também saiu do `ViewportSectionBody`, ficou mais compacto, ganhou fundo escuro na seção e teve a copy ampliada de "carro" para "próxima conquista".
 - As principais copies da landing foram trocadas para uma comunicação mais comercial: sonho, consórcio sem juros, simulação em 3 minutos, parcelas baixas, prova social de 500 clientes e comparação mais orientada a custo.
+- A seção "Simulador" agora fala em estimativa de parcela, reforça que valores finais dependem de perfil, entrada e administradora, e centraliza o valor mensal.
+- O FAQ público foi reescrito com respostas mais didáticas sobre administradora, contemplação, estratégias de contemplação, lance, sorteio e score.
+- Travessões longos remanescentes em copies públicas foram removidos e trocados por vírgulas, pontos ou dois-pontos.
+- O formulário de lead usa `Demais Serviços` como opção de modalidade no lugar de `Procedimentos Corporais`.
 - `npm run lint` e `npm run build` passaram após a remoção do CRM, a simplificação do fluxo e os ajustes visuais recentes.
 
 ## [LOG DE ALTERAÇÕES]
@@ -115,6 +120,14 @@
 - `src/components/landing/services-grid.tsx`: descrições de imóveis, veículos, máquinas agrícolas e serviços atualizadas.
 - `src/components/landing/comparison-section.tsx`: título e introdução do comparativo atualizados para enfatizar economia e diferença prática.
 - `README.md` e `READMEAI.md`: documentação atualizada com a rodada de copy comercial.
+- `src/app/page.tsx`: copy do cabeçalho do simulador atualizada para estimativa de parcela e ressalva sobre perfil, entrada e administradora.
+- `src/components/landing/credit-simulator.tsx`: removido o campo visual de modelo do plano; parcela mensal ficou centralizada e com maior destaque.
+- `src/components/landing/faq-section.tsx`: respostas do FAQ substituídas pela versão mais didática enviada pelo cliente, sem travessões longos.
+- `src/components/landing/services-grid.tsx`: travessões longos removidos das descrições públicas de veículos e serviços.
+- `README.md` e `READMEAI.md`: documentação atualizada com remoção do modelo no simulador, FAQ reescrito e limpeza de travessões.
+- `src/components/landing/lead-capture-form.tsx`: opção de modalidade alterada de `Procedimentos Corporais` para `Demais Serviços`.
+- `src/components/landing/site-footer.tsx`: link da página do Facebook adicionado ao bloco de contato do rodapé.
+- `README.md` e `READMEAI.md`: documentação atualizada com a nova opção de modalidade e canal de Facebook no rodapé.
 - `src/proxy.ts`: removido.
 - `src/lib/admin-data.ts`: removido.
 - `src/app/admin/*`: removido.
@@ -153,6 +166,7 @@
 - Não usar `ViewportSectionBody` no CTA final quando ele estiver colado ao footer; o wrapper adiciona padding de seção e pode criar uma faixa clara desnecessária no fim.
 - Já havia um `next dev` ativo em `http://localhost:3002`; novas tentativas em portas 3001/3003 não foram necessárias para validar esta rodada.
 - As novas claims comerciais usam expressões fortes como `sem juros`, `zero burocracias` e `95% menos custo total`; manter essas frases somente se estiverem alinhadas com a política comercial, taxas administrativas e materiais aprovados pela operação.
+- O cliente pediu remoção de travessões longos nas copies públicas; manter essa preferência em futuras revisões e usar vírgulas, pontos ou dois-pontos no lugar.
 
 ## [PRÓXIMOS PASSOS]
 
@@ -172,6 +186,8 @@
 - Validar se a prova social na faixa azul abaixo do hero continua confortável em telas muito baixas, especialmente `320x568`.
 - Validar o `#inicio` em desktop real (`1366x768`, `1440x900` e telas maiores) para confirmar que hero + prova social ficam entre 90% e 100% da tela sem parecerem vazios.
 - Validar a seção `#simulador` em desktop para confirmar que o título acima melhora leitura e não cria excesso de respiro.
+- Validar a seção `#simulador` em desktop e mobile para confirmar que a parcela centralizada ficou mais clara sem o campo de modelo.
+- Validar o FAQ reescrito em desktop e mobile, principalmente as respostas longas dentro do accordion e do sheet em telas pequenas.
 - Validar em celular real se o recorte quadrado da foto da seção "Sobre" continua mostrando rosto e nome com boa nitidez em telas menores que `390px`.
 - Validar o recorte quadrado desktop da foto da seção "Sobre" em notebook e monitor maior, conferindo se rosto e nome continuam visíveis.
 - Validar no navegador real se o botão flutuante de WhatsApp aparece suavemente após a primeira seção e não cobre CTAs ou cards importantes nas seções seguintes.
@@ -194,12 +210,14 @@
   - `creditValue`
   - `installment`
   - `city`
+- A opção pública `Demais Serviços` é enviada no mesmo campo `modality`; não houve mudança de schema nem de endpoint.
 - A lógica de integrações está centralizada em [src/lib/leads.ts](C:/Projetos/ws-inovacoes/src/lib/leads.ts).
 - O endpoint principal de captação continua sendo [route.ts](C:/Projetos/ws-inovacoes/src/app/api/leads/route.ts).
 - O Google Apps Script é agora o ponto central do Google:
   - gravação em planilha
   - envio de e-mail
 - A decisão do link de WhatsApp foi isolada em `src/components/landing/smart-whatsapp-link.tsx`; mudanças futuras nesse comportamento devem começar ali.
+- O link público do Facebook fica em `src/components/landing/site-footer.tsx` como constante local `FACEBOOK_URL`.
 - O título e o favicon da aplicação são definidos via metadata em `src/app/layout.tsx`; o título deve permanecer simples como `WS Inovações`, e o favicon vem de `logo-symbol.png` sem depender de `favicon.ico`.
 - A copy comercial principal está espalhada por `src/app/page.tsx`, `src/components/landing/about-section.tsx`, `src/components/landing/services-grid.tsx` e `src/components/landing/comparison-section.tsx`; futuras revisões de promessa/claims devem começar nesses arquivos.
 - O hero principal vive em `src/app/page.tsx`; ajustes de posicionamento de marca e promessa comercial devem começar ali.
@@ -219,5 +237,6 @@
 - A navegação por hash está centralizada em `src/components/landing/site-navbar.tsx`; o offset deve continuar medindo a barra fixa interna (`navbarBarRef`) e somando `--site-anchor-gap`, nunca o `header` inteiro quando o menu mobile estiver aberto.
 - O CSS de âncoras vive em `src/app/globals.css` com `--site-anchor-gap` e `--site-anchor-offset`; manter `scroll-padding-top` e `scroll-margin-top` sincronizados para cliques nativos e scroll client-side terem o mesmo respiro.
 - O FAQ mobile vive no mesmo arquivo da versão desktop (`src/components/landing/faq-section.tsx`), mas usa layout separado + `Sheet`. Não tentar reaproveitar o accordion inline no celular se a meta continuar sendo uma tela por seção.
+- O simulador vive em `src/components/landing/credit-simulator.tsx` e deve apresentar apenas crédito e parcela estimada para o visitante. O modelo interno do plano não deve voltar para a UI sem pedido explícito.
 - O Instagram mobile também vive no mesmo componente da versão desktop (`src/components/landing/instagram-feed-section.tsx`), mas com um trilho local `snap-x` e controle por dots; não adicionar biblioteca de carrossel sem necessidade real.
 - Se o projeto ganhar Supabase depois, a recomendação é não misturar novamente CRM + Apps Script + outro CRM externo. Escolher uma fonte principal de gestão e manter o restante como canais de notificação.

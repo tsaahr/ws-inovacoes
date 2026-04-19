@@ -32,7 +32,7 @@ const modalityOptions = [
   "Automóvel",
   "Imobiliário",
   "Rural",
-  "Procedimentos Corporais",
+  "Demais Serviços",
 ] as const;
 
 const leadFormSchema = z.object({

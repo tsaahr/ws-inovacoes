@@ -13,29 +13,29 @@ import { Slider } from "@/components/ui/slider";
 import { formatCurrency } from "@/lib/utils";
 
 const CREDIT_PLANS = [
-  { model: "VW001", credit: 45000, installment: 365.06 },
-  { model: "VW002", credit: 50000, installment: 405.63 },
-  { model: "VW003", credit: 55000, installment: 446.19 },
-  { model: "VW004", credit: 60000, installment: 486.75 },
-  { model: "VW005", credit: 65000, installment: 527.31 },
-  { model: "VW006", credit: 70000, installment: 567.88 },
-  { model: "VW007", credit: 75000, installment: 608.44 },
-  { model: "VW008", credit: 80000, installment: 649.0 },
-  { model: "VW009", credit: 85000, installment: 689.56 },
-  { model: "VW010", credit: 90000, installment: 730.13 },
-  { model: "VW011", credit: 120000, installment: 973.5 },
-  { model: "VW012", credit: 130000, installment: 1054.63 },
-  { model: "VW013", credit: 140000, installment: 1135.75 },
-  { model: "VW014", credit: 150000, installment: 1216.88 },
-  { model: "VW015", credit: 160000, installment: 1298.0 },
-  { model: "VW016", credit: 170000, installment: 1379.13 },
-  { model: "VW017", credit: 180000, installment: 1460.25 },
-  { model: "VW018", credit: 190000, installment: 1541.38 },
-  { model: "VW019", credit: 200000, installment: 1622.5 },
-  { model: "VW020", credit: 210000, installment: 1703.63 },
-  { model: "VW021", credit: 220000, installment: 1784.75 },
-  { model: "VW022", credit: 230000, installment: 1865.88 },
-  { model: "VW023", credit: 240000, installment: 1947.0 },
+  { credit: 45000, installment: 365.06 },
+  { credit: 50000, installment: 405.63 },
+  { credit: 55000, installment: 446.19 },
+  { credit: 60000, installment: 486.75 },
+  { credit: 65000, installment: 527.31 },
+  { credit: 70000, installment: 567.88 },
+  { credit: 75000, installment: 608.44 },
+  { credit: 80000, installment: 649.0 },
+  { credit: 85000, installment: 689.56 },
+  { credit: 90000, installment: 730.13 },
+  { credit: 120000, installment: 973.5 },
+  { credit: 130000, installment: 1054.63 },
+  { credit: 140000, installment: 1135.75 },
+  { credit: 150000, installment: 1216.88 },
+  { credit: 160000, installment: 1298.0 },
+  { credit: 170000, installment: 1379.13 },
+  { credit: 180000, installment: 1460.25 },
+  { credit: 190000, installment: 1541.38 },
+  { credit: 200000, installment: 1622.5 },
+  { credit: 210000, installment: 1703.63 },
+  { credit: 220000, installment: 1784.75 },
+  { credit: 230000, installment: 1865.88 },
+  { credit: 240000, installment: 1947.0 },
 ] as const;
 
 const DEFAULT_PLAN_INDEX = CREDIT_PLANS.findIndex(
@@ -76,19 +76,13 @@ export function CreditSimulator() {
             aria-label="Valor do crédito"
           />
         </div>
-        <div className="grid gap-2.5 md:grid-cols-2 sm:gap-3">
-          <div className="rounded-lg bg-muted p-3 sm:p-4">
+        <div className="grid gap-2.5 sm:gap-3">
+          <div className="rounded-lg bg-muted p-3 text-center sm:p-5">
             <p className="text-[11px] text-muted-foreground sm:text-sm">
               Parcela mensal
             </p>
-            <p className="mt-1.5 text-sm font-semibold text-brand-navy sm:mt-2 sm:text-lg">
+            <p className="mt-1.5 text-lg font-semibold text-brand-navy sm:mt-2 sm:text-2xl">
               {formatCurrency(selectedPlan.installment)}
-            </p>
-          </div>
-          <div className="rounded-lg bg-muted p-3 sm:p-4">
-            <p className="text-[11px] text-muted-foreground sm:text-sm">Modelo</p>
-            <p className="mt-1.5 text-sm font-semibold text-brand-dark sm:mt-2 sm:text-base">
-              {selectedPlan.model}
             </p>
           </div>
         </div>

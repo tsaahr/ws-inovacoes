@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Camera, MapPin, MessageCircle } from "lucide-react";
+import { Camera, ExternalLink, MapPin, MessageCircle } from "lucide-react";
 
 import logoSymbol from "../../../logo-symbol.png";
 
@@ -11,6 +11,7 @@ type SiteFooterProps = {
 };
 
 const INSTAGRAM_URL = "https://www.instagram.com/ws.inovacoes/";
+const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61567650595065";
 
 const quickLinks = [
   { href: "#contato", label: "Simulação" },
@@ -84,6 +85,15 @@ export function SiteFooter({
               >
                 <Camera className="size-4" />
                 Instagram
+              </a>
+              <a
+                href={FACEBOOK_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 transition-colors hover:text-white"
+              >
+                <ExternalLink className="size-4" />
+                Facebook
               </a>
               <span className="inline-flex items-center gap-2">
                 <MapPin className="size-4" />

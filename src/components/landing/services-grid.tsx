@@ -23,7 +23,7 @@ const services = [
     icon: Truck,
     title: "Veículos leves e pesados",
     description:
-      "Seu veículo sem juros. Carros, caminhões, ônibus—do trabalho ao lazer. Parcelas previsíveis, sem juros.",
+      "Seu veículo sem juros. Carros, caminhões e ônibus, do trabalho ao lazer. Parcelas previsíveis, sem juros.",
   },
   {
     icon: Tractor,
@@ -35,7 +35,7 @@ const services = [
     icon: Briefcase,
     title: "Serviços",
     description:
-      "Seus projetos realizados. Educação, saúde, viagens, reformas—tudo sem juros. Parcele seus sonhos.",
+      "Seus projetos realizados. Educação, saúde, viagens e reformas, tudo sem juros. Parcele seus sonhos.",
   },
 ] as const;
 

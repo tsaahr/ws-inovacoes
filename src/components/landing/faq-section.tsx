@@ -21,32 +21,32 @@ const faqs = [
   {
     question: "O que é uma administradora de consórcio?",
     answer:
-      "O consórcio tem como prestadora de serviço uma administradora responsável pela gestão dos interesses do grupo de consorciados. A administradora cobra, pela prestação do serviço, uma taxa de administração que varia de acordo com cada empresa, modalidade de consórcio e prazo do plano. Cabe à administradora não apenas administrar como também zelar pela saúde financeira do grupo.",
+      "A administradora é a empresa que gerencia todo o consórcio. Ela organiza os sorteios, recebe suas contribuições mensais, realiza os lances e libera a carta de crédito quando você é contemplado. Em troca, cobra uma taxa de administração pequena, que varia conforme o plano. Pense nela como um gerente de banco: ela cuida da saúde financeira do grupo.",
   },
   {
     question: "O que é contemplação e como funciona?",
     answer:
-      "Contemplação é quando o cliente passa a ter o direito de obter o crédito para a compra do objeto do plano. As contemplações ocorrem em assembleias realizadas mensalmente e só participam os clientes com os pagamentos realizados até a data de vencimento.",
+      "Contemplação é quando você pode finalmente usar seu crédito. Existem duas formas:\n\n1. Sorteio: Mensalmente, a administradora sorteia nomes de consorciados. Se seu nome sair, você é contemplado e pode usar o dinheiro para comprar.\n\n2. Lance: Você oferece um valor extra para ser contemplado mais rápido. Quem der o maior lance, ou vencer o sorteio entre lances iguais, é contemplado.\n\nQuando contemplado, você recebe uma carta de crédito com o dinheiro para comprar imóvel, veículo ou máquina na hora, como se fosse dinheiro à vista.",
   },
   {
     question: "Como posso ser contemplado?",
     answer:
-      "As contemplações podem ocorrer das seguintes formas:\n\nSorteio: a apuração da cota sorteada será realizada com base na extração da Loteria Federal.\n\nLance: a oferta de lance deverá ocorrer até um dia antes da assembleia. É considerado como lance vencedor o consorciado que oferecer o maior percentual em relação ao valor do bem objeto do plano.",
+      "Existem 3 estratégias principais:\n\n1. Esperar o sorteio: Todo mês a administradora sorteia nomes. Todos têm chance igual. É só sorte.\n\n2. Fazer um lance: Você oferece um valor extra para ser contemplado mais rápido. Quem der o maior valor é contemplado. Funciona como um leilão.\n\n3. Lance embutido: Você usa parte do seu próprio crédito para fazer um lance, sem gastar dinheiro do seu bolso. É uma estratégia para quem quer antecipar sem sacrificar a renda.\n\nDica: A melhor estratégia depende da sua urgência e do seu orçamento. Fale com nosso consultor. Ele vai ajudar a escolher!",
   },
   {
     question: "O que é lance?",
     answer:
-      "É o direito do consorciado concorrer à contemplação, mediante a antecipação de parcelas oferecidas por ocasião das assembleias dos grupos. Dependendo da disponibilidade de caixa do grupo, será contemplado o maior lance, de acordo com as regras contratuais.",
+      "Lance é uma oferta que você faz para ser contemplado mais rápido. Ao invés de esperar o sorteio, você oferece um valor extra à administradora. Quem ofertar o maior lance é contemplado naquele mês.\n\nTipos de lance:\n\n* Lance Livre: Você oferece qualquer valor. Quem der mais, ganha, tipo leilão.\n\n* Lance Fixo: A administradora define um valor fixo. Todos que oferecerem esse valor entram em um sorteio. Só quem ganhar paga.\n\n* Lance Embutido: Você usa parte do seu próprio crédito para fazer o lance, sem gastar dinheiro extra do seu bolso.\n\nImportante: Lance não garante contemplação 100%. Depende da estratégia e das regras da administradora.",
   },
   {
     question: "Como funciona o sorteio?",
     answer:
-      "De acordo com a disponibilidade da caixa, um ou mais participantes do grupo serão sorteados para receber sua Carta de Crédito, no valor do plano a que aderiu, independentemente do número de prestações que tenha pago. O Sorteio serve apenas para definição da ordem de recebimento do crédito, uma vez que todos os participantes do grupo receberão até o final do plano.",
+      "Todo mês, a administradora sorteia nomes usando a Loteria Federal. É totalmente transparente e imparcial. Todos têm chance igual.\n\nComo funciona na prática:\n\nSeu número de cota: Quando você entra no consórcio, recebe um número único, por exemplo 12345.\n\nSorteio mensal: A administradora usa os últimos 5 dígitos da Loteria Federal. Por exemplo, se sair 50345, quem tem cota 0345 é contemplado.\n\nSe já foi contemplado: Pula para o próximo número válido.\n\nResultado: Você recebe notificação e pode usar o crédito imediatamente.\n\nImportante: Sorteios acontecem todo mês. Quanto maior o grupo, mais chances de contemplação mensal.",
   },
   {
     question: "Preciso ter score alto para entrar?",
     answer:
-      "Não necessariamente. Em muitos casos, o consórcio não exige um score alto como acontece em modalidades tradicionais de crédito. Ainda assim, a administradora realiza análise cadastral e documental conforme suas políticas, tanto na adesão quanto na contemplação. O mais importante é manter sua documentação regular e capacidade de seguir com as parcelas em dia.",
+      "Não! Todo mundo pode entrar em consórcio. Diferente do financiamento, consórcio não exige score alto nem análise de crédito rígida.\n\nO que importa:\n\n* Estar em dia com CPF, sem restrições graves.\n\n* Renda comprovada que pague a parcela, mínimo 30% da renda.\n\n* Documentos básicos, como RG, CPF e comprovante de renda.\n\nVantagem: Mesmo com score baixo, você entra no grupo e participa dos sorteios. Só na hora de usar o crédito, quando contemplado, é que pode haver análise mais detalhada.\n\nDica: Se tiver restrições, fale conosco. Temos administradoras mais flexíveis.",
   },
 ] as const;
 

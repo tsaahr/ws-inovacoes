@@ -222,11 +222,12 @@ export default async function Home() {
                   Simulador
                 </p>
                 <h2 className="mt-2 text-[1.55rem] font-semibold leading-[1.05] text-brand-dark sm:mt-3 sm:text-3xl md:text-4xl xl:text-5xl">
-                  Veja uma referência real antes da conversa.
+                  Veja uma estimativa de parcela.
                 </h2>
                 <p className="mt-2 max-w-2xl text-xs leading-[1.375rem] text-muted-foreground sm:mt-3 sm:text-base sm:leading-7 lg:text-lg lg:leading-8">
-                  Navegue pelos valores da tabela atual e entenda quanto cada
-                  faixa de crédito representa em parcela no plano.
+                  Navegue pelos valores de crédito e veja quanto sairia
+                  mensalmente. Valores finais dependem de seu perfil, entrada e
+                  administradora.
                 </p>
               </div>
               <CreditSimulator />

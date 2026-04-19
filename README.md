@@ -15,7 +15,9 @@ As CTAs públicas de WhatsApp agora usam um link inteligente:
 
 A marca também passou a ser usada como ícone da aba, o título da guia fica apenas como `WS Inovações`, e a landing ganhou um botão flutuante de WhatsApp no canto inferior direito, exibido após a primeira seção para não cobrir a prova social do hero.
 
-A copy do hero foi ampliada para posicionar a WS Inovações além de carro, incluindo também imóvel e investimento. A seção institucional usa `foto3.jpeg` com enquadramento responsivo mais limpo, o topo e o rodapé mostram só o nome da marca, e o simulador exibe crédito, parcela e modelo sem mostrar prazo em meses.
+O rodapé reúne os canais públicos da marca: WhatsApp, Instagram e página do Facebook.
+
+A copy do hero foi ampliada para posicionar a WS Inovações além de carro, incluindo também imóvel e investimento. A seção institucional usa `foto3.jpeg` com enquadramento responsivo mais limpo, o topo e o rodapé mostram só o nome da marca, e o simulador exibe crédito e parcela estimada sem mostrar prazo em meses nem modelo do plano.
 
 A copy comercial da home agora é mais direta para conversão, com foco em sonho, consórcio sem juros, simulação em poucos minutos, parcelas acessíveis e prova social de mais de 500 clientes.
 
@@ -28,6 +30,8 @@ A home usa offset de âncoras compatível com o menu fixo: as seções têm `scr
 No desktop, as seções seguem fluxo contínuo com altura por conteúdo e sem scroll isolado em cada seção. A exceção deliberada é o `#inicio`, que pode ocupar entre 90% e 100% da tela junto com a prova social para criar uma primeira dobra mais forte. As demais seções usam altura natural para reduzir espaços vazios e revelar o início do próximo bloco. A seção de simulação também ganhou um plano azul atrás do formulário para reforçar contraste e acabamento visual.
 
 O rodapé é renderizado em layout próprio, sem wrapper de viewport, e o CTA final agora usa fundo escuro compacto para evitar áreas brancas sobrando no fim da página.
+
+O FAQ público foi reescrito com respostas mais didáticas sobre administradora, contemplação, lance, sorteio e análise de score, mantendo a experiência de accordion no desktop e sheet no mobile.
 
 ## Stack
 
@@ -193,7 +197,7 @@ O formulário coleta:
 - Nome
 - E-mail
 - WhatsApp com máscara `(99) 99999-9999`
-- Modalidade do crédito
+- Modalidade do crédito, incluindo `Demais Serviços`
 - Valor do crédito
 - Parcela ideal
 - Cidade/Estado
