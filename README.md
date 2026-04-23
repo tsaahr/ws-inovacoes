@@ -8,6 +8,8 @@ Landing page em Next.js 16 para captação de leads de consórcio, com envio par
 
 Neste momento o projeto está sem CRM e sem painel administrativo. A ideia é manter o fluxo simples para receber leads e organizar tudo pelo Google + WhatsApp.
 
+O acesso público do site pode ser bloqueado temporariamente por `src/proxy.ts`. Quando `SITE_BLOCKED` estiver como `true`, páginas e rotas do site retornam uma tela simples de indisponibilidade com status `503`.
+
 As CTAs públicas de WhatsApp agora usam um link inteligente:
 
 - desktop: `web.whatsapp.com/send`

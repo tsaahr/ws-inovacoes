@@ -3,6 +3,7 @@
 ## [ESTADO ATUAL]
 
 - Landing page pública em Next.js 16, React 19, Tailwind CSS v4 e shadcn/ui.
+- O site está temporariamente bloqueado por `src/proxy.ts`, retornando uma página simples de indisponibilidade com status `503` enquanto `SITE_BLOCKED = true`.
 - Fluxo de leads simplificado para 3 destinos práticos:
   - WhatsApp via Evolution API
   - Google Sheets via Apps Script
@@ -128,6 +129,8 @@
 - `src/components/landing/lead-capture-form.tsx`: opção de modalidade alterada de `Procedimentos Corporais` para `Demais Serviços`.
 - `src/components/landing/site-footer.tsx`: link da página do Facebook adicionado ao bloco de contato do rodapé.
 - `README.md` e `READMEAI.md`: documentação atualizada com a nova opção de modalidade e canal de Facebook no rodapé.
+- `src/proxy.ts`: adicionado bloqueio temporário do site por Proxy do Next.js 16, retornando HTML simples e status `503`.
+- `README.md` e `READMEAI.md`: documentação atualizada com o mecanismo de bloqueio temporário.
 - `src/proxy.ts`: removido.
 - `src/lib/admin-data.ts`: removido.
 - `src/app/admin/*`: removido.
@@ -167,6 +170,7 @@
 - Já havia um `next dev` ativo em `http://localhost:3002`; novas tentativas em portas 3001/3003 não foram necessárias para validar esta rodada.
 - As novas claims comerciais usam expressões fortes como `sem juros`, `zero burocracias` e `95% menos custo total`; manter essas frases somente se estiverem alinhadas com a política comercial, taxas administrativas e materiais aprovados pela operação.
 - O cliente pediu remoção de travessões longos nas copies públicas; manter essa preferência em futuras revisões e usar vírgulas, pontos ou dois-pontos no lugar.
+- Existe um arquivo não rastreado `midleware.ts` na raiz com nome incorreto e função `middleware`; o Next.js 16 usa `proxy.ts`, então o bloqueio ativo foi implementado em `src/proxy.ts`.
 
 ## [PRÓXIMOS PASSOS]
 
@@ -199,6 +203,7 @@
 - Validar com o responsável comercial/jurídico as claims `sem juros`, `zero burocracias` e `95% menos custo total` antes de tráfego pago ou campanhas maiores.
 - Se a próxima rodada for de acabamento visual, continuar a otimização mobile começando por comparação, Instagram e footer, porque são as seções mais apertadas do novo one-screen.
 - Se futuramente for criado um CRM com Supabase, começar reaproveitando o schema atual de lead em `src/lib/leads.ts`.
+- Para liberar o site novamente, começar em `src/proxy.ts` e trocar `SITE_BLOCKED` para `false` ou remover o arquivo, depois rodar `npm run lint` e `npm run build`.
 
 ## [NOTAS DE ARQUITETURA]
 
@@ -218,6 +223,7 @@
   - envio de e-mail
 - A decisão do link de WhatsApp foi isolada em `src/components/landing/smart-whatsapp-link.tsx`; mudanças futuras nesse comportamento devem começar ali.
 - O link público do Facebook fica em `src/components/landing/site-footer.tsx` como constante local `FACEBOOK_URL`.
+- O bloqueio temporário do site fica em `src/proxy.ts`; ele usa a convenção Proxy do Next.js 16, não `middleware.ts`.
 - O título e o favicon da aplicação são definidos via metadata em `src/app/layout.tsx`; o título deve permanecer simples como `WS Inovações`, e o favicon vem de `logo-symbol.png` sem depender de `favicon.ico`.
 - A copy comercial principal está espalhada por `src/app/page.tsx`, `src/components/landing/about-section.tsx`, `src/components/landing/services-grid.tsx` e `src/components/landing/comparison-section.tsx`; futuras revisões de promessa/claims devem começar nesses arquivos.
 - O hero principal vive em `src/app/page.tsx`; ajustes de posicionamento de marca e promessa comercial devem começar ali.
