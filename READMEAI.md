@@ -4,7 +4,8 @@
 
 - Landing page pública em Next.js 16, React 19, Tailwind CSS v4 e shadcn/ui.
 - O acesso público do site está ativo novamente: `src/proxy.ts` mantém o mecanismo de indisponibilidade preparado, mas `SITE_BLOCKED = false` deixa as páginas e rotas funcionarem normalmente.
-- A reativação foi validada com `npm run lint`, `npm run build` e teste HTTP local: home em `200`, marca presente, tela de indisponibilidade ausente e `/api/leads` sem bloqueio `503`.
+- A reativação foi validada com `npm run lint`, `npm run build`, teste HTTP local e deploy de produção: home em `200`, marca presente, tela de indisponibilidade ausente e `/api/leads` sem bloqueio `503`.
+- O commit de reativação `b25e798` foi publicado com sucesso pela Vercel em `https://ws-inovacoes.vercel.app`.
 - Fluxo de leads simplificado para 3 destinos práticos:
   - WhatsApp via Evolution API
   - Google Sheets via Apps Script
@@ -135,6 +136,7 @@
 - `src/proxy.ts`: `SITE_BLOCKED` alterado para `false`, reativando o acesso público sem remover o mecanismo de manutenção.
 - `midleware.ts`: arquivo legado com nome incorreto removido; o Next.js 16 usa exclusivamente `src/proxy.ts`.
 - `README.md` e `READMEAI.md`: documentação atualizada para registrar que o site voltou ao estado ativo.
+- `READMEAI.md`: validação do deploy de produção registrada após a Vercel publicar o commit de reativação.
 - `src/proxy.ts`: removido.
 - `src/lib/admin-data.ts`: removido.
 - `src/app/admin/*`: removido.
@@ -179,6 +181,7 @@
 - Em PowerShell, não usar `$home` como variável de teste porque os nomes são case-insensitive e `$HOME` é reservado; usar um nome específico como `$homeResponse`.
 - Para testar produção em uma porta específica neste ambiente, `npm run start -- -p 3217` perdeu o argumento curto e tratou `3217` como diretório; funcionou chamar `node .\node_modules\next\dist\bin\next start --port 3217` diretamente.
 - O timeout da ferramenta não encerrou o processo do servidor local; o listener foi identificado pela porta `3217` e encerrado pelo PID exato após o teste.
+- Logo após o push, o domínio ainda respondeu `503` por alguns segundos; a integração Vercel criou o deployment do novo SHA em seguida e o domínio passou a responder `200`.
 
 ## [PRÓXIMOS PASSOS]
 
@@ -211,7 +214,7 @@
 - Validar com o responsável comercial/jurídico as claims `sem juros`, `zero burocracias` e `95% menos custo total` antes de tráfego pago ou campanhas maiores.
 - Se a próxima rodada for de acabamento visual, continuar a otimização mobile começando por comparação, Instagram e footer, porque são as seções mais apertadas do novo one-screen.
 - Se futuramente for criado um CRM com Supabase, começar reaproveitando o schema atual de lead em `src/lib/leads.ts`.
-- Confirmar no ambiente publicado que a home e `/api/leads` não retornam mais a resposta `503` depois do deploy da reativação.
+- Fazer um teste real de envio do formulário em produção e conferir o recebimento no WhatsApp, na planilha e no e-mail configurados.
 
 ## [NOTAS DE ARQUITETURA]
 
