@@ -1,4 +1,4 @@
-const SITE_BLOCKED = true;
+const SITE_BLOCKED = false;
 
 const BLOCKED_PAGE = `<!doctype html>
 <html lang="pt-BR">
