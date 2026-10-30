@@ -1,6 +1,7 @@
 # READMEAI - WS Inovações
 
 ## [ESTADO ATUAL]
+- 2026-10-30: copia versionada arquivada em `https://github.com/tsaahr/ws-inovacoes.git` no ramo `archive/local-cleanup-2026-10-30`; `main` foi mantida intacta. Dados locais ficam em `C:\Dados-projetos-nao-versionados-2026-10-30\ws-inovacoes`.
 
 - Landing page pública em Next.js 16, React 19, Tailwind CSS v4 e shadcn/ui.
 - O acesso público do site está ativo novamente: `src/proxy.ts` mantém o mecanismo de indisponibilidade preparado, mas `SITE_BLOCKED = false` deixa as páginas e rotas funcionarem normalmente.
@@ -55,6 +56,7 @@
 - `npm run lint` e `npm run build` passaram após a remoção do CRM, a simplificação do fluxo e os ajustes visuais recentes.
 
 ## [LOG DE ALTERAÇÕES]
+- 2026-10-30: `READMEAI.md` registra o ramo de arquivo `archive/local-cleanup-2026-10-30`, o remoto usado e o destino do estado local. Nenhuma funcionalidade, dependencia ou comando publico mudou.
 
 - `src/lib/leads.ts`: removida a integração com HubSpot; agora o backend trabalha apenas com Google Apps Script + Evolution API.
 - `src/app/api/leads/route.ts`: fluxo refeito para usar somente dois destinos em paralelo (`google` e `evolution`).
@@ -144,6 +146,7 @@
 - `src/components/admin/*`: removido.
 
 ## [BLOQUEIOS/ERROS]
+- 2026-10-30: Nao havia credenciais nem dados locais ignorados que precisassem ser preservados.
 
 - O projeto tinha uma camada de CRM local (`/admin`) e também integração com HubSpot, o que ficou excessivo para o objetivo atual de receber leads de forma direta.
 - Para evitar depender de outro provedor de e-mail, o envio por e-mail foi movido para o Google Apps Script com `MailApp`, o que simplifica bastante a operação.
@@ -184,6 +187,7 @@
 - Logo após o push, o domínio ainda respondeu `503` por alguns segundos; a integração Vercel criou o deployment do novo SHA em seguida e o domínio passou a responder `200`.
 
 ## [PRÓXIMOS PASSOS]
+- Para retomar, clonar `https://github.com/tsaahr/ws-inovacoes.git` no ramo `archive/local-cleanup-2026-10-30` e restaurar apenas os dados locais necessarios de `C:\Dados-projetos-nao-versionados-2026-10-30\ws-inovacoes`; manter `main` sem force-push.
 
 - Validar em navegador real os cliques do menu em `#contato`, `#sobre`, `#servicos`, `#como-funciona`, `#simulador` e `#faq`, conferindo se cada título encosta logo abaixo da navbar.
 - Validar especialmente o clique em FAQ no desktop depois de deploy, porque a seção mantém dois títulos responsivos e a navegação depende do título visível.
@@ -217,6 +221,7 @@
 - Fazer um teste real de envio do formulário em produção e conferir o recebimento no WhatsApp, na planilha e no e-mail configurados.
 
 ## [NOTAS DE ARQUITETURA]
+- 2026-10-30: o arquivamento usa o ramo separado `archive/local-cleanup-2026-10-30`; nenhuma decisao de arquitetura ou historico de `main` foi reescrita.
 
 - O payload do lead continua padronizado em:
   - `name`
